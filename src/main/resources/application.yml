@@ -1,6 +1,20 @@
+server:
+  port: 8080
+
 spring:
+  jpa:
+    hibernate:
+      ddl-auto: create-drop
+    properties:
+      hibernate:
+        format_sql: true
+        show_sql: true
   datasource:
-    url: jdbc:mysql://localhost:3036/stocklog
-    driver-class-name: com.mysql.cj.jdbc.Driver
-    username: stocklog
     password: stocklog
+    username: stocklog
+    url: jdbc:mysql://localhost:3306/stocklog
+    driver-class-name: com.mysql.cj.jdbc.Driver
+
+jwt:
+  key: hO27fxnV9dbCFfx0YQp6yCYD7Tvqj2T3Lno91rBoMKj1Jxuh2f
+  time: 86400000
