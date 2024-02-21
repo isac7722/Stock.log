@@ -10,7 +10,7 @@ import java.util.Objects;
 
 @RestController
 @RequestMapping("/users")
-@Tag(name = "", description = "매매 노트를 관리하는 API")
+@Tag(name = "회원 관리 API", description = "회원 관리하는 API")
 public class UsersController {
 
     private final UsersService usersService;
@@ -20,7 +20,7 @@ public class UsersController {
     }
 
     @PostMapping("/create")
-    public ResponseEntity userCreateByUsers(@RequestBody Users user){
+    public ResponseEntity userCreate(@RequestBody Users user){
 
         Users signUp = usersService.usersCreateByUsers(user);
         if(Objects.isNull(signUp)){

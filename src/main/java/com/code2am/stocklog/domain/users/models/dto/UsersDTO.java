@@ -13,5 +13,5 @@ public class UsersDTO {
 
     private String userStatus;
 
-    private int userCapital;
+    private Integer userCapital;
 }
