@@ -17,3 +17,8 @@ spring:
 mybatis:
   mapper-locations: classpath:resources/mapper/**/*.xml
   config-location: classpath:mapper/mapper-config.xml
+
+jwt:
+  key: hO27fxnV9dbCFfx0YQp6yCYD7Tvqj2T3Lno91rBoMKj1Jxuh2f
+  time: 86400000
+
