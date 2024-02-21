@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.code2am.stocklog.notes.dao.NotesDAO">
+
+    <resultMap id="Notes" type="com.code2am.stocklog.notes.models.vo.NotesVo">
+        <id property="noteId" column="NOTE_ID"/>
+        <result property="noteContents" column="NOTE_CONTENTS"/>
+        <result property="noteDate" column="NOTE_DATE"/>
+    </resultMap>
+
+    <select id="readNotes" resultMap="Notes">
+        SELECT
+            *
+        FROM
+            TBL_NOTE
+    </select>
+</mapper>

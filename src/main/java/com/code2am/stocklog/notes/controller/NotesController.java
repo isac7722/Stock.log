@@ -2,6 +2,7 @@ package com.code2am.stocklog.notes.controller;
 
 import com.code2am.stocklog.notes.models.dto.NotesDTO;
 import com.code2am.stocklog.notes.models.entity.Notes;
+import com.code2am.stocklog.notes.models.vo.NotesVo;
 import com.code2am.stocklog.notes.service.NotesService;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.Parameter;
@@ -12,6 +13,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
 import java.util.Objects;
 
 @RestController
@@ -50,5 +52,11 @@ public class NotesController {
 
         System.out.println(note);
         return ResponseEntity.ok("등록에 성공하였습니다.");
+    }
+
+    @GetMapping
+    public List<NotesVo> readNotes(){
+        // xml 테스트
+        return notesService.readNotes();
     }
 }

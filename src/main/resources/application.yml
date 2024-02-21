@@ -13,3 +13,7 @@ spring:
         format_sql: true
     hibernate:
       ddl-auto: create-drop
+
+mybatis:
+  mapper-locations: classpath:resources/mapper/**/*.xml
+  config-location: classpath:mapper/mapper-config.xml
