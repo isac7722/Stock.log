@@ -1,10 +1,14 @@
 package com.code2am.stocklog.notes.service;
 
-import com.code2am.stocklog.notes.mapper.NotesMapper;
+import com.code2am.stocklog.notes.dao.NotesDAO;
 import com.code2am.stocklog.notes.models.dto.NotesDTO;
+import com.code2am.stocklog.notes.models.entity.Notes;
+import com.code2am.stocklog.notes.models.vo.NotesVo;
 import com.code2am.stocklog.notes.repository.NotesRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
+import java.util.List;
 
 @Service
 public class NotesService {
@@ -13,10 +17,20 @@ public class NotesService {
     private NotesRepository notesRepository;
 
     @Autowired
-    private NotesMapper notesMapper;
+    private NotesDAO notesDAO;
 
-    public void insertNoteByJournalId(NotesDTO notesDTO) {
+    public Notes createNoteByJournalId(NotesDTO notesDTO) {
 
-        notesRepository.insertNoteByJournalId(notesDTO);
+        Notes newNote = new Notes();
+        newNote.setNoteContents(notesDTO.getNoteContents());
+        newNote.setNoteDate(notesDTO.getNoteDate());
+        newNote.setNoteStatus("Y");
+        notesRepository.save(newNote);
+
+        return newNote;
+    }
+
+    public List<NotesVo> readNotes() {
+        return notesDAO.readNotes();
     }
 }
