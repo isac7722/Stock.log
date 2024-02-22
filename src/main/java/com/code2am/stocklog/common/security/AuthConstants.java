@@ -1,4 +1,4 @@
-package com.code2am.stocklog.domain.common.security;
+package com.code2am.stocklog.common.security;
 
 public class AuthConstants {
     public static final String AUTH_HEADER = "Authorization";
