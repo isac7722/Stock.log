@@ -20,9 +20,9 @@ public class UsersController {
     }
 
     @PostMapping("/create")
-    public ResponseEntity userCreate(@RequestBody Users user){
+    public ResponseEntity createAccount(@RequestBody Users user){
 
-        Users signUp = usersService.usersCreateByUsers(user);
+        Users signUp = usersService.createAccount(user);
         if(Objects.isNull(signUp)){
             return ResponseEntity.status(500).body("가입이 실패되었습니다.");
         }

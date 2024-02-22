@@ -1,5 +1,6 @@
 package com.code2am.stocklog.domain.users.models.entity;
 
+import jakarta.annotation.Nullable;
 import jakarta.persistence.*;
 import lombok.Data;
 import lombok.Getter;
