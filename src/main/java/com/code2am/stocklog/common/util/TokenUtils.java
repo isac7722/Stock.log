@@ -1,4 +1,4 @@
-package com.code2am.stocklog.domain.common.util;
+package com.code2am.stocklog.common.util;
 
 import com.code2am.stocklog.domain.users.models.entity.Users;
 import io.jsonwebtoken.*;

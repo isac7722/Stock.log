@@ -1,4 +1,4 @@
-package com.code2am.stocklog.domain.common.config;
+package com.code2am.stocklog.common.config;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
