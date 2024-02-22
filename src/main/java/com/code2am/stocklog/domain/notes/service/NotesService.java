@@ -47,4 +47,15 @@ public class NotesService {
 
         return result;
     }
+
+
+    public void deleteNoteByNoteId(NotesDTO notesDTO) {
+
+        Notes deleteNote = new Notes();
+        deleteNote.setNoteId(notesDTO.getNoteId());
+        deleteNote.setNoteContents(notesDTO.getNoteContents());
+        deleteNote.setNoteDate(notesDTO.getNoteDate());
+        deleteNote.setNoteStatus("N");
+        notesRepository.save(deleteNote);
+    }
 }

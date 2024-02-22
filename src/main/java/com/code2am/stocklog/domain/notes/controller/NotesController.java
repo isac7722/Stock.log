@@ -84,4 +84,21 @@ public class NotesController {
 
         return notesService.readNotesByJournalId(journalId);
     }
+
+    /**
+     * 해당 매매노트를 삭제하는 메소드
+     * @param notesDTO
+     * @return 해당 매매노트를 삭제함
+     * */
+    @Operation(
+            summary = "매매노트 삭제",
+            description = "이미 존재하고 있는 매매노트를 삭제합니다.",
+            tags = {"DELETE"}
+    )
+    @ApiResponse(responseCode = "200", description = "매매노트를 삭제함.")
+    @DeleteMapping
+    public void deleteNoteByNoteId(@RequestBody NotesDTO notesDTO){
+        // 실제로는 삭제 메카니즘이 아니라 상태를 수정함
+        notesService.deleteNoteByNoteId(notesDTO);
+    }
 }
