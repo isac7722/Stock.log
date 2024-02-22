@@ -2,6 +2,10 @@ package com.code2am.stocklog.domain.strategies.controller;
 
 import com.code2am.stocklog.domain.strategies.models.dto.StrategiesDTO;
 import com.code2am.stocklog.domain.strategies.service.StrategiesService;
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.Parameter;
+import io.swagger.v3.oas.annotations.responses.ApiResponse;
+import io.swagger.v3.oas.annotations.responses.ApiResponses;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -20,6 +24,16 @@ public class StrategiesController {
     @Autowired
     private StrategiesService strategiesService;
 
+    @Operation(
+            summary = "매매전략 등록",
+            description = "매매전략을 등록합니다.",
+            tags = {"POST"}
+    )
+    @Parameter(name = "strategy", description = "사용자가 입력한 매매전략")
+    @ApiResponses(value = {
+            @ApiResponse(responseCode = "200", description = "매매전략 등록 성공"),
+            @ApiResponse(responseCode = "400", description = "잘못된 입력입니다.")
+    })
     @PostMapping
     public ResponseEntity createStrategy(@RequestBody StrategiesDTO strategy){
 
