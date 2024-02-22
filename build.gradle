@@ -30,10 +30,9 @@ dependencies {
     annotationProcessor 'org.projectlombok:lombok'
     testImplementation 'org.springframework.boot:spring-boot-starter-test'
     testImplementation 'org.mybatis.spring.boot:mybatis-spring-boot-starter-test:3.0.3'
+
     // swagger 가장 사용성이 높은 2.2.0을 선택
     implementation group: 'org.springdoc', name: 'springdoc-openapi-starter-webmvc-ui', version: '2.2.0'
-
-
 
     // jpa를 사용하기 위한 lib이다.
     implementation 'org.springframework.boot:spring-boot-starter-data-jpa'

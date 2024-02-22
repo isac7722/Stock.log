@@ -18,7 +18,7 @@ public class UsersService {
     }
 
     public Users usersCreateByUsers(Users user){
-        user.setPass(encoder.encode(user.getPass()));
+        user.setPassword(encoder.encode(user.getPassword()));
         user.setStatus("Y");
 
         Users signUp = usersRepository.save(user);
