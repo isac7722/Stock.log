@@ -1,4 +1,4 @@
-package com.code2am.stocklog.notes.models.entity;
+package com.code2am.stocklog.domain.notes.models.entity;
 
 import jakarta.persistence.*;
 import lombok.Data;

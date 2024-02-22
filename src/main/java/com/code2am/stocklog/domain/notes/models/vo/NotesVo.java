@@ -1,11 +1,11 @@
-package com.code2am.stocklog.notes.models.dto;
+package com.code2am.stocklog.domain.notes.models.vo;
 
 import lombok.Data;
 
 import java.util.Date;
 
 @Data
-public class NotesDTO {
+public class NotesVo {
 
     private Integer noteId;
 
@@ -13,7 +13,4 @@ public class NotesDTO {
 
     private Date noteDate;
 
-    private String noteStatus;
-
-    private Integer journalId;
 }

@@ -1,10 +1,10 @@
-package com.code2am.stocklog.notes.service;
+package com.code2am.stocklog.domain.notes.service;
 
-import com.code2am.stocklog.notes.dao.NotesDAO;
-import com.code2am.stocklog.notes.models.dto.NotesDTO;
-import com.code2am.stocklog.notes.models.entity.Notes;
-import com.code2am.stocklog.notes.models.vo.NotesVo;
-import com.code2am.stocklog.notes.repository.NotesRepository;
+import com.code2am.stocklog.domain.notes.dao.NotesDAO;
+import com.code2am.stocklog.domain.notes.models.entity.Notes;
+import com.code2am.stocklog.domain.notes.models.vo.NotesVo;
+import com.code2am.stocklog.domain.notes.models.dto.NotesDTO;
+import com.code2am.stocklog.domain.notes.repository.NotesRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 

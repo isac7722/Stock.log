@@ -1,9 +1,9 @@
-package com.code2am.stocklog.notes.controller;
+package com.code2am.stocklog.domain.notes.controller;
 
-import com.code2am.stocklog.notes.models.dto.NotesDTO;
-import com.code2am.stocklog.notes.models.entity.Notes;
-import com.code2am.stocklog.notes.models.vo.NotesVo;
-import com.code2am.stocklog.notes.service.NotesService;
+import com.code2am.stocklog.domain.notes.models.dto.NotesDTO;
+import com.code2am.stocklog.domain.notes.models.entity.Notes;
+import com.code2am.stocklog.domain.notes.models.vo.NotesVo;
+import com.code2am.stocklog.domain.notes.service.NotesService;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.Parameter;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
