@@ -14,7 +14,7 @@
         SELECT
             *
         FROM
-            TBL_NOTE
+            TBL_NOTES
         WHERE
             JOURNAL_ID = #{journalId}
             AND
