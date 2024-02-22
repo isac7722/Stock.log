@@ -19,15 +19,20 @@ public class StrategiesService {
     @Autowired
     private StrategiesDAO strategiesDAO;
 
-    public void createStrategy(StrategiesDTO strategy) {
+    public String createStrategy(StrategiesDTO strategy) {
 
-        // 동일한 매매전략이 있을 경우 행하지 않는다.
+        // 동일한 이름의 매매전략이 있을 경우 행하지 않는다.
+        StrategiesDTO find = readStrategyByStrategyName(strategy.getStrategyName());
+        if(!Objects.isNull(find)){
+            return "";
+        }
 
         Strategies newStrategy = new Strategies();
         newStrategy.setStrategyName(strategy.getStrategyName());
         newStrategy.setStrategyStatus("Y");
 
         strategiesRepository.save(newStrategy);
+        return "정상적으로 등록되었습니다.";
     }
 
     public List<StrategiesDTO> readStrategies() {
@@ -54,5 +59,9 @@ public class StrategiesService {
 
     public StrategiesDTO readStrategyByStrategyId(Integer strategyId){
         return strategiesDAO.readStrategyByStrategyId(strategyId);
+    }
+
+    public StrategiesDTO readStrategyByStrategyName(String strategyName){
+        return strategiesDAO.readStrategyByStrategyName(strategyName);
     }
 }

@@ -27,4 +27,13 @@
         WHERE
             STRATEGY_ID = #{strategyId}
     </select>
+
+    <select id="readStrategyByStrategyName" resultMap="Strategies">
+        SELECT
+            *
+        FROM
+            TBL_STRATEGIES
+        WHERE
+            STRATEGY_NAME = #{strategyName}
+    </select>
 </mapper>

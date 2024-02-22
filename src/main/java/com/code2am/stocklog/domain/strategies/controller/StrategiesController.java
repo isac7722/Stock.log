@@ -43,7 +43,10 @@ public class StrategiesController {
             return ResponseEntity.badRequest().body("잘못된 요청입니다.");
         }
 
-        strategiesService.createStrategy(strategy);
+        String result = strategiesService.createStrategy(strategy);
+        if(result.isEmpty()){
+            return ResponseEntity.badRequest().body("이미 같은 매매전략이 존재하고 있습니다.");
+        }
 
         return ResponseEntity.ok("정상적으로 등록되었습니다.");
     }
