@@ -35,5 +35,4 @@ public class WebSecurityConfig {
         // SpringFilterChain에 걸어줌 build
         return http.build();
     }
-
 }
