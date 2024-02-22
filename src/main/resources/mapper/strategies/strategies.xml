@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.code2am.stocklog.domain.strategies.dao.StrategiesDAO">
+
+    <resultMap id="Strategies" type="com.code2am.stocklog.domain.strategies.models.dto.StrategiesDTO">
+        <id property="strategyId" column="STRATEGY_ID"/>
+        <result property="strategyName" column="STRATEGY_NAME"/>
+        <result property="strategyStatus" column="STRATEGY_STATUS"/>
+    </resultMap>
+
+</mapper>
