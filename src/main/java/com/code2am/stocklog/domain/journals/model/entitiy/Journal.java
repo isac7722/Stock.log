@@ -5,14 +5,14 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.Data;
 
+import java.time.LocalDateTime;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 
 @Entity
 @Table(name = "TBL_JOURNALS")
 @Data
-public class Journals {
+public class Journal {
 
 
     // 매매일지 pk
@@ -28,7 +28,7 @@ public class Journals {
     // 최종 거래일
     @Column(name = "LAST_TRADED_DATE")
     @Temporal(TemporalType.TIMESTAMP)
-    private Date lastTradedDate;
+    private LocalDateTime lastTradedDate;
 
     // 매수 평균금가
     @Column(name = "BUY_PRICE")
@@ -63,9 +63,20 @@ public class Journals {
     private Integer strategyId;
 
     /* 현재 매매일지와 연관이 있는 매매기록들 */
-    @JsonIgnore
     @OneToMany(cascade = CascadeType.PERSIST, mappedBy = "journalId")
-    private List<Trades> trades = new ArrayList<>();
+    private List<Trade> trades = new ArrayList<>();
+
+
+
+
+    /* 현재 매매일지와 연관이 있는 매매기록들 */
+//    @JsonIgnore
+//    @OneToMany(cascade = CascadeType.PERSIST, mappedBy = "journalCode")
+//    private List<Trade> trades = new ArrayList<>();
+
+
+    /* ================================================================= */
+    /* 매매일지와 관련 있는 Notes 추가 필요*/
 
 
 
