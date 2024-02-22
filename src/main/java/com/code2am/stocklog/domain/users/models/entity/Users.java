@@ -6,6 +6,8 @@ import lombok.Data;
 import lombok.Getter;
 import lombok.Setter;
 
+import java.time.LocalDateTime;
+
 @Data
 @Entity
 @Table(name = "TBL_USERS")
@@ -32,4 +34,6 @@ public class Users {
     @Nullable
     private String social;
 
+    @Column(name = "CREATED_DATE")
+    private LocalDateTime createDate;
 }

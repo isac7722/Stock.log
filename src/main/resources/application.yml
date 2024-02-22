@@ -1,4 +1,22 @@
 spring:
+  security:
+    oauth2:
+      client:
+        registration:
+          kakao:
+            client-id: 3b4c220a8a44d816c1d89dadfe79559a
+            redirect-uri: http://localhost:8080/kakao/callback
+            client-authentication-method: POST
+            client-secret: dVIowzafwyG3Z6FLGwmDJufF0YV80vaw
+            authorization-grant-type: authorization_code
+            scope: account-email
+            client-name: Kakao
+        provider:
+          kakao:
+            authorization-uri: https://kauth.kakao.com/oauth/authorize
+            token-uri: https://kauth.kakao.com/oauth/token
+            user-info-uri: https://kapi.kakao.com/v2/user/me
+            user-name-attribute: id
   datasource:
     url: jdbc:mysql://localhost:3306/stocklog
     driver-class-name: com.mysql.cj.jdbc.Driver

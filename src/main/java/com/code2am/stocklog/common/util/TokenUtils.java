@@ -17,6 +17,9 @@ public class TokenUtils {
     private static String jwtSecretKey;
     private static Long tokenValidateTime;
 
+    @Value("${kakao.client-id")
+    public String apiKey;
+
     @Value("${jwt.key}")
     public void setJwtSecretKey(String jwtSecretKey) {
         TokenUtils.jwtSecretKey = jwtSecretKey;

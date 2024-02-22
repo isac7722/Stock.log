@@ -7,9 +7,6 @@ import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configurers.AbstractHttpConfigurer;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
-import org.springframework.security.oauth2.client.registration.ClientRegistration;
-import org.springframework.security.oauth2.client.registration.ClientRegistrationRepository;
-import org.springframework.security.oauth2.client.registration.InMemoryClientRegistrationRepository;
 import org.springframework.security.web.SecurityFilterChain;
 
 @Configuration  // 환경 구성?
@@ -30,11 +27,10 @@ public class WebSecurityConfig {
                     // URL 기반으로 접근 허용
                     auth.requestMatchers("/**").permitAll();
                     auth.anyRequest().authenticated();
-                })
-                .formLogin(form -> form.disable())
-                .httpBasic(basic -> basic.disable());
-                // SNS 로그인을 위한 OAuth 2.0 로그인 구성
-                //.oauth2Login(oauth2 -> oauth2.clientRegistrationRepository(clientRegistrationRepository));
+
+                });
+
+
 
         // SpringFilterChain에 걸어줌 build
         return http.build();
