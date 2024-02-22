@@ -2,6 +2,7 @@ package com.code2am.stocklog.domain.strategies.models.entity;
 
 import jakarta.persistence.*;
 import lombok.Data;
+import org.hibernate.annotations.DynamicUpdate;
 
 @Entity
 @Table(name = "TBL_STRATEGIES")

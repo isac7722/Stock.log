@@ -18,4 +18,13 @@
         WHERE
             STRATEGY_STATUS = 'Y'
     </select>
+
+    <select id="readStrategyByStrategyId" resultMap="Strategies">
+        SELECT
+            *
+        FROM
+            TBL_STRATEGIES
+        WHERE
+            STRATEGY_ID = #{strategyId}
+    </select>
 </mapper>

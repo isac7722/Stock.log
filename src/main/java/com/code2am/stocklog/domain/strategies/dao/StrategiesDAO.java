@@ -8,4 +8,6 @@ import java.util.List;
 @Mapper
 public interface StrategiesDAO {
     List<StrategiesDTO> readStrategies();
+
+    StrategiesDTO readStrategyByStrategyId(Integer strategyId);
 }

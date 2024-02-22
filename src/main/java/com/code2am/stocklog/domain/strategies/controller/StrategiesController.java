@@ -63,4 +63,10 @@ public class StrategiesController {
         return strategiesService.readStrategies();
     }
 
+    @DeleteMapping
+    public void deleteStrategyByStrategyId(@RequestBody StrategiesDTO strategy){
+
+        strategiesService.deleteStrategyByStrategyId(strategy);
+    }
+
 }
