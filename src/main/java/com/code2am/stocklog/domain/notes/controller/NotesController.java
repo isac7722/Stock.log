@@ -18,7 +18,7 @@ import java.util.Objects;
 
 @RestController
 @RequestMapping("/notes")
-@Tag(name = "매매노트 API", description = "매매 노트를 관리하는 API")
+@Tag(name = "매매노트 관리 API", description = "매매 노트를 관리하는 API")
 public class NotesController {
 
     @Autowired
@@ -27,7 +27,8 @@ public class NotesController {
     /**
      * 매매노트를 입력받는 메소드
      * @param notesDTO
-     * @return ResponseEntity.ok */
+     * @return 신규 매매노트를 입력합니다.
+     * */
     @Operation(
             summary = "매매노트 등록",
             description = "신규 매매노트를 등록합니다.",
@@ -47,6 +48,7 @@ public class NotesController {
             return ResponseEntity.status(404).body("입력값이 없습니다.");
         }
 
+        // 실제 입력받은 데이터를 입력 로직으로
         Notes note = notesService.createNoteByJournalId(notesDTO);
 
         // 요청이 원활히 도착했는지 확인
@@ -75,11 +77,11 @@ public class NotesController {
     })
     @GetMapping
     public List<NotesVo> readNotesByJournalId(@RequestBody NotesDTO notesDTO){
-
+        // 조회에 필요한 매매일지 데이터가 있는지 확인
         if(Objects.isNull(notesDTO)){
             return null;
         }
-
+        // 매매일지의 id 값만 추출
         Integer journalId = notesDTO.getJournalId();
 
         return notesService.readNotesByJournalId(journalId);
