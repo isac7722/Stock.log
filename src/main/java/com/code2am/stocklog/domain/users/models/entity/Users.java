@@ -28,4 +28,8 @@ public class Users {
     @Column(name = "CAPITAL")
     private Integer capital;
 
+    @Column(name = "SOCIAL")
+    @Nullable
+    private String social;
+
 }
