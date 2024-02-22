@@ -2,7 +2,7 @@ package com.code2am.stocklog.domain.notes.models.vo;
 
 import lombok.Data;
 
-import java.util.Date;
+import java.time.LocalDateTime;
 
 @Data
 public class NotesVo {
@@ -11,6 +11,6 @@ public class NotesVo {
 
     private String noteContents;
 
-    private Date noteDate;
+    private LocalDateTime noteDate;
 
 }
