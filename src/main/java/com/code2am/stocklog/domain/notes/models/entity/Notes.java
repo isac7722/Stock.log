@@ -3,7 +3,7 @@ package com.code2am.stocklog.domain.notes.models.entity;
 import jakarta.persistence.*;
 import lombok.Data;
 
-import java.util.Date;
+import java.time.LocalDateTime;
 
 @Data
 @Entity
@@ -20,12 +20,11 @@ public class Notes {
 
     @Column(name = "NOTE_DATE")
     @Temporal(value = TemporalType.TIMESTAMP)
-    private Date noteDate;
+    private LocalDateTime noteDate;
 
     @Column(name = "NOTE_STATUS")
     private String noteStatus;
 
-//    @JoinColumn(name = "JOURNAL_ID")
-//    @ManyToOne
-//    private Journal journal;
+    @Column(name = "JOURNAL_ID")
+    private Integer journalId;
 }

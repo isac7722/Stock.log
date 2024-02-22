@@ -2,7 +2,7 @@ package com.code2am.stocklog.domain.notes.models.dto;
 
 import lombok.Data;
 
-import java.util.Date;
+import java.time.LocalDateTime;
 
 @Data
 public class NotesDTO {
@@ -11,7 +11,7 @@ public class NotesDTO {
     // 매매노트 내용
     private String noteContents;
     // 매매노트 등록 날짜
-    private Date noteDate;
+    private LocalDateTime noteDate;
     // 매매노트 상태
     private String noteStatus;
     // 매매일지 FK
