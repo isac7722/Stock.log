@@ -9,6 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Objects;
 
 @Service
 public class NotesService {
@@ -30,7 +31,20 @@ public class NotesService {
         return newNote;
     }
 
-    public List<NotesVo> readNotes() {
-        return notesDAO.readNotes();
+
+    public List<NotesVo> readNotesByJournalId(Integer journalId) {
+
+        if(journalId <= 0){
+            System.out.println("존재할 수 없는 매매일지");
+            return null;
+        }
+
+        List<NotesVo> result = notesDAO.readNotesByJournalId(journalId);
+
+        if(Objects.isNull(result)){
+            return null;
+        }
+
+        return result;
     }
 }

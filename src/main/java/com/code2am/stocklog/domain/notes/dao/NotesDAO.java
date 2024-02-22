@@ -7,5 +7,6 @@ import java.util.List;
 
 @Mapper
 public interface NotesDAO {
-    List<NotesVo> readNotes();
+    List<NotesVo> readNotesByJournalId(Integer journalId);
+
 }

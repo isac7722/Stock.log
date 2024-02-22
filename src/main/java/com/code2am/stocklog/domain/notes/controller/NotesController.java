@@ -24,10 +24,14 @@ public class NotesController {
     @Autowired
     public NotesService notesService;
 
-
+    /**
+     * 매매노트를 입력받는 메소드
+     * @param notesDTO
+     * @return ResponseEntity.ok */
     @Operation(
             summary = "매매노트 등록",
-            description = "신규 매매노트를 등록합니다.")
+            description = "신규 매매노트를 등록합니다.",
+            tags = {"POST"})
     @ApiResponses(value = {
             @ApiResponse(responseCode = "200", description = "매매노트를 성공적으로 등록함."),
             @ApiResponse(responseCode = "404", description = "요청에 필요한 값이 정상적으로 입력되지 앟음."),
@@ -36,7 +40,7 @@ public class NotesController {
     @Parameter(name = "notesDTO", description = "매매일지에 신규로 등록할 매매노트")
     @PostMapping
     public ResponseEntity createNoteByJournalId(@RequestBody NotesDTO notesDTO){
-        // 매매일지에서 이용자의 요청을 받아 해당 일지에 노트를 작성한다.
+        // 매매일지에서 이용자의 요청을 받아 해당 일지에 노트를 작성한다. 매매일지의 키 값을 필수로 요구한다.
 
         // 요청값이 없는지 확인
         if(Objects.isNull(notesDTO)){
@@ -45,7 +49,7 @@ public class NotesController {
 
         Notes note = notesService.createNoteByJournalId(notesDTO);
 
-
+        // 요청이 원활히 도착했는지 확인
         if(Objects.isNull(note)){
             return ResponseEntity.status(500).body("서버의 통신이 원할치 못합니다.");
         }
@@ -54,9 +58,30 @@ public class NotesController {
         return ResponseEntity.ok("등록에 성공하였습니다.");
     }
 
+    /**
+     * 매매일지에 해당하는 매매노트를 조회하는 메소드
+     * @param notesDTO
+     * @return 매매일지에 해당되는 모든 매매노트
+     * */
+    @Operation(
+            summary = "매매노트 조회",
+            description = "매매일지의 PrimaryKey 값과 노트의 상태가 'Y'인 조건으로 매매노트를 조회합니다.",
+            tags = {"GET"}
+    )
+    @ApiResponses(value = {
+            @ApiResponse(responseCode = "200", description = "매매노트를 성공적으로 조회함."),
+            @ApiResponse(responseCode = "404", description = "해당하는 매매일지가 존재하지 않음."),
+            @ApiResponse(responseCode = "500", description = "서버가 원할히 동작하지 않거나 DB의 값이 존재하지 않음.")
+    })
     @GetMapping
-    public List<NotesVo> readNotes(){
-        // xml 테스트
-        return notesService.readNotes();
+    public List<NotesVo> readNotesByJournalId(@RequestBody NotesDTO notesDTO){
+
+        if(Objects.isNull(notesDTO)){
+            return null;
+        }
+
+        Integer journalId = notesDTO.getJournalId();
+
+        return notesService.readNotesByJournalId(journalId);
     }
 }

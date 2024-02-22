@@ -10,10 +10,14 @@
         <result property="noteDate" column="NOTE_DATE"/>
     </resultMap>
 
-    <select id="readNotes" resultMap="Notes">
+    <select id="readNotesByJournalId" resultMap="Notes">
         SELECT
             *
         FROM
             TBL_NOTE
+        WHERE
+            JOURNAL_ID = #{journalId}
+            AND
+            NOTE_STATUS = 'Y'
     </select>
 </mapper>
