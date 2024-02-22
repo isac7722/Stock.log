@@ -2,18 +2,22 @@
 <!DOCTYPE mapper
         PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="com.code2am.stocklog.notes.dao.NotesDAO">
+<mapper namespace="com.code2am.stocklog.domain.notes.dao.NotesDAO">
 
-    <resultMap id="Notes" type="com.code2am.stocklog.notes.models.vo.NotesVo">
+    <resultMap id="Notes" type="com.code2am.stocklog.domain.notes.models.vo.NotesVo">
         <id property="noteId" column="NOTE_ID"/>
         <result property="noteContents" column="NOTE_CONTENTS"/>
         <result property="noteDate" column="NOTE_DATE"/>
     </resultMap>
 
-    <select id="readNotes" resultMap="Notes">
+    <select id="readNotesByJournalId" resultMap="Notes">
         SELECT
             *
         FROM
-            TBL_NOTE
+            TBL_NOTES
+        WHERE
+            JOURNAL_ID = #{journalId}
+            AND
+            NOTE_STATUS = 'Y'
     </select>
 </mapper>

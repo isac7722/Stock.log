@@ -1,4 +1,4 @@
-package com.code2am.stocklog.notes.models.vo;
+package com.code2am.stocklog.domain.notes.models.vo;
 
 import lombok.Data;
 
