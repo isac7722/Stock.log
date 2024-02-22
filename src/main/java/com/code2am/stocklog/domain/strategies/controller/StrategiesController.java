@@ -9,11 +9,9 @@ import io.swagger.v3.oas.annotations.responses.ApiResponses;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
 import java.util.Objects;
 
 @RestController
@@ -24,6 +22,10 @@ public class StrategiesController {
     @Autowired
     private StrategiesService strategiesService;
 
+    /**
+     * 매매전략을 등록하는 메소드
+     * @param strategy
+     * */
     @Operation(
             summary = "매매전략 등록",
             description = "매매전략을 등록합니다.",
@@ -44,6 +46,21 @@ public class StrategiesController {
         strategiesService.createStrategy(strategy);
 
         return ResponseEntity.ok("정상적으로 등록되었습니다.");
+    }
+
+    /**
+     * 매매전략을 조회하는 메소드
+     * @return 모든 매매전략
+     * */
+    @Operation(
+            summary = "매매전략을 조회",
+            description = "모든 매매전략을 조회합니다.",
+            tags = {"GET"}
+    )
+    @GetMapping
+    public List<StrategiesDTO> readStrategies(){
+
+        return strategiesService.readStrategies();
     }
 
 }

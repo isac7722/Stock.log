@@ -10,4 +10,12 @@
         <result property="strategyStatus" column="STRATEGY_STATUS"/>
     </resultMap>
 
+    <select id="readStrategies" resultMap="Strategies">
+        SELECT
+            *
+        FROM
+            TBL_STRATEGIES
+        WHERE
+            STRATEGY_STATUS = 'Y'
+    </select>
 </mapper>
