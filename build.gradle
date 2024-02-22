@@ -42,7 +42,8 @@ dependencies {
     implementation "io.jsonwebtoken:jjwt:0.9.1"
     // 개발을 위한 devTools
     developmentOnly 'org.springframework.boot:spring-boot-devtools'
-
+    // OAuth2를 사용하기 위한 lib
+    implementation 'org.springframework.security:spring-security-oauth2-client'
 }
 
 tasks.named('test') {

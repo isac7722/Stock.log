@@ -17,7 +17,7 @@ public class UsersService {
         this.encoder = encoder;
     }
 
-    public Users usersCreateByUsers(Users user){
+    public Users createAccount(Users user){
         user.setPassword(encoder.encode(user.getPassword()));
         user.setStatus("Y");
 
@@ -25,4 +25,10 @@ public class UsersService {
 
         return signUp;
     }
+
+//    public Users createAccountByKakao(Users user){
+//
+//    }
+
+
 }
