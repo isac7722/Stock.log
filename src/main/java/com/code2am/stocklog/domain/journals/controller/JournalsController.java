@@ -2,6 +2,7 @@ package com.code2am.stocklog.domain.journals.controller;
 
 import com.code2am.stocklog.domain.journals.model.dto.JournalDTO;
 import com.code2am.stocklog.domain.journals.model.dto.TradeDTO;
+import com.code2am.stocklog.domain.journals.model.entitiy.Journal;
 import com.code2am.stocklog.domain.journals.service.JournalsService;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.Parameter;
@@ -41,7 +42,7 @@ public class JournalsController {
     })
     @Parameter(name = "createJournal", description = "신규로 등록할 매매일지")
     @PostMapping
-    public ResponseEntity<JournalDTO> createJournal(@RequestBody JournalDTO newJournal){
+    public ResponseEntity<JournalDTO> createJournal(@RequestBody JournalDTO journalDTO){
 
         /*
         프런트에서 사용자에게 받는 정보
@@ -68,24 +69,8 @@ public class JournalsController {
 
 
 
-
-       /* 최종 거래일 입력 */
-        newJournal.setLastTradedDate(getLastTradedDate(newJournal));
-
-        /* 평균 매수가 입력 */
-        newJournal.setBuyPrice(getAverageBuyPrice(newJournal));
-
-        /* 매수 총량 입력 */
-        newJournal.setBuyQty(getTotalBuyQuantity(newJournal));
-
-        /* 매도 평균가 입력*/
-        newJournal.setSellPrice(getAverageSellPrice(newJournal));
-
-        /* 매도 총량 입력 */
-        newJournal.setSellQty(getTotalSellQuantity(newJournal));
-
-        /* 수익률 입력 */
-        newJournal.setProfit(getProfit(newJournal));
+        // 매매일지의 정보를 업데이트
+        JournalDTO newJournal = journalInfoUpdate(journalDTO);
 
         // 새 매매일지를 등록
         journalsService.createJournal(newJournal);
@@ -114,7 +99,34 @@ public class JournalsController {
         return ResponseEntity.ok(journals);
     }
 
+
+
+
+
+
     /* 매매일지 수정 */
+    @Operation(
+            summary = "매매일지 변경",
+            description = "사용자의 매매일지를 변경합니다.",
+            tags = {"JournalsController","update","Journals"}
+    )
+    @ApiResponses(value = {
+            @ApiResponse(responseCode = "200", description = "매매일지를 성공적으로 변경함."),
+            @ApiResponse(responseCode = "404", description = "요청에 필요한 값이 정상적으로 변경되지 않음."),
+            @ApiResponse(responseCode = "500", description = "요청받은 서버가 정상적으로 동작하지 않음.")
+    })
+    @Parameter(name = "update", description = "변경할 매매일지")
+    @PostMapping("/update")
+    public ResponseEntity <String> updateJournal(@RequestBody JournalDTO journalDTO) {
+
+
+        JournalDTO updateJournal = journalInfoUpdate(journalDTO);
+        // 매매일지 변경
+        journalsService.updateJournal(updateJournal);
+
+        return ResponseEntity.ok("변경성공");
+    }
+
 
 
 
@@ -122,7 +134,7 @@ public class JournalsController {
     @Operation(
             summary = "매매일지 삭제",
             description = "사용자의 매매일지를 삭제합니다",
-            tags = {"JournalsController","get","Journals"}
+            tags = {"JournalsController","delete","Journals"}
     )
     @ApiResponses(value = {
             @ApiResponse(responseCode = "200", description = "매매일지를 성공적으로 삭제함."),
@@ -131,14 +143,11 @@ public class JournalsController {
     })
     @Parameter(name = "deleteJournal", description = "삭제할 매매일지")
     @DeleteMapping("/delete")
-    public ResponseEntity <String> deleteJournalByJournalId(@RequestBody JournalDTO journal) {
+    public ResponseEntity <String> deleteJournal(@RequestBody JournalDTO journal) {
 
-        System.out.println("데이터 들어옴");
-        System.out.println(journal);
-
+        JournalDTO deleteJournal = journalInfoUpdate(journal);
         // 실제로는 삭제 메카니즘이 아니라 상태를 수정함
-        String message = journalsService.deleteJournalByJournalId(journal);
-
+        String message = journalsService.deleteJournalByJournalId(deleteJournal);
 
         return ResponseEntity.ok(message);
     }
@@ -152,8 +161,28 @@ public class JournalsController {
 
 
 
+    // 입력받은 값을 통해 journalDTO의 정보를 업데이트 하는 메소드
+    public JournalDTO journalInfoUpdate(JournalDTO journalDTO){
+        /* 최종 거래일 입력 */
+        journalDTO.setLastTradedDate(getLastTradedDate(journalDTO));
 
+        /* 평균 매수가 입력 */
+        journalDTO.setBuyPrice(getAverageBuyPrice(journalDTO));
 
+        /* 매수 총량 입력 */
+        journalDTO.setBuyQty(getTotalBuyQuantity(journalDTO));
+
+        /* 매도 평균가 입력*/
+        journalDTO.setSellPrice(getAverageSellPrice(journalDTO));
+
+        /* 매도 총량 입력 */
+        journalDTO.setSellQty(getTotalSellQuantity(journalDTO));
+
+        /* 수익률 입력 */
+        journalDTO.setProfit(getProfit(journalDTO));
+
+        return journalDTO;
+    }
 
 
 

@@ -18,6 +18,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Objects;
 import java.util.stream.Collectors;
 
 @Service
@@ -87,6 +88,41 @@ public class JournalsService {
     }
 
 
+    // 매매일지를 변경하는 메소드
+    @Transactional
+    public void updateJournal(JournalDTO journalDTO) {
+
+        Journal updatedJournal = convertToJournal(journalDTO);
+
+        // 관련된 매매기록을 변경한다
+        if (!(Objects.isNull(journalDTO.getTrades()))){
+            List<Trade> updatedTrades = updatedJournal.getTrades();
+            updatedTrades = linkTradesToJournal(updatedTrades, updatedJournal);
+
+            tradesRepository.saveAll(updatedTrades);
+        }
+
+
+        // 관련된 매매노트를 변경한다
+
+
+        // notes가 있는 경우 변경
+        if ((!Objects.isNull(journalDTO.getNotes()))){
+            List<NotesDTO> updatedNotes = journalDTO.getNotes();
+
+            updatedNotes = linkNotesDTOToJournalDTO(updatedNotes, journalDTO);
+
+            for (NotesDTO note : updatedNotes){
+                notesService.deleteNoteByNoteId(note);
+            }
+        }
+
+        // 먼저 매매일지를 저장하고 저장된 매매일지 객체를 반환받는다
+        journalsRepository.save(convertToJournal(journalDTO));
+
+    }
+
+
     // 매매일지를 지우는 매소드
     @Transactional
     public String deleteJournalByJournalId(JournalDTO journal) {
@@ -95,6 +131,7 @@ public class JournalsService {
 
         // 해당 매매일지의 매매기록들의 상태를 변환한다
         List<Trade> deleteTrades = deleteJournal.getTrades();
+        deleteTrades = linkTradesToJournal(deleteTrades, deleteJournal);
 
         for (Trade trade : deleteTrades) {
             trade.setActivateStatus("N");
@@ -104,6 +141,8 @@ public class JournalsService {
 
         // 해당 매매일지의 매매노트들의 상태를 변환한다
         List<NotesDTO> deleteNotes = journal.getNotes();
+
+        deleteNotes = linkNotesDTOToJournalDTO(deleteNotes, journal);
 
         for (NotesDTO note : deleteNotes){
             notesService.deleteNoteByNoteId(note);
@@ -128,6 +167,22 @@ public class JournalsService {
 
 
 
+
+    // 매매기록에 연관관계를 주입하는 메소드
+    public List<Trade> linkTradesToJournal(List<Trade> trades, Journal journal){
+        for (Trade trade : trades){
+            trade.setJournalId(journal.getJournalId());
+        }
+        return trades;
+    }
+
+    // 매매노트에 연관관계를 주입하는 메소드
+    public List<NotesDTO> linkNotesDTOToJournalDTO(List<NotesDTO> notesDTOS, JournalDTO journalDTO){
+        for (NotesDTO notesDTO : notesDTOS){
+            notesDTO.setJournalId(journalDTO.getJournalId());
+        }
+        return notesDTOS;
+    }
 
 
 
