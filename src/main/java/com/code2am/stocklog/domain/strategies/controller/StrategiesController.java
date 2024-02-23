@@ -85,10 +85,23 @@ public class StrategiesController {
             tags = {"GET"}
     )
     @GetMapping("/user")
-    public List<StrategiesDTO> readStrategiesByUserId(@RequestBody UsersIdDTO user){ // 매매변수는 추후에 수정가능성이 있음
+    public List<StrategiesDTO> readStrategiesByUserId(@RequestBody UsersIdDTO user){ // 매개변수는 추후에 수정
 
         Integer userId = user.getUserId();
 
         return strategiesService.readStrategiesByUserId(userId);
+    }
+
+    @Operation(
+            summary = "사용자용, 매매전략 삭제",
+            description = "사용자가 자신의 매매전략을 삭제합니다. 실제 동작에 있어서는 관계만을 끊는 것으로 DB의 데이터를 손상시키지 않습니다.",
+            tags = {"DELETE"}
+    )
+    @DeleteMapping("/delete")
+    public void deleteStrategyByStrategyIdAndUserId(@RequestBody StrategiesDTO strategy){ // 매개변수는 추후 수정
+
+        Integer userId = 1;
+
+        strategiesService.deleteStrategyByStrategyIdAndUserId(strategy, userId);
     }
 }

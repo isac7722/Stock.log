@@ -4,6 +4,7 @@ import com.code2am.stocklog.domain.strategies.dao.StrategiesDAO;
 import com.code2am.stocklog.domain.strategies.models.dto.StrategiesDTO;
 import com.code2am.stocklog.domain.strategies.models.entity.Strategies;
 import com.code2am.stocklog.domain.strategies.models.entity.UsersAndStrategies;
+import com.code2am.stocklog.domain.strategies.models.entity.UsersAndStrategiesId;
 import com.code2am.stocklog.domain.strategies.repository.StrategiesRepository;
 import com.code2am.stocklog.domain.strategies.repository.UsersAndStrategiesRepository;
 import com.code2am.stocklog.domain.users.models.entity.Users;
@@ -97,5 +98,12 @@ public class StrategiesService {
 
     public List<StrategiesDTO> readStrategiesByUserId(Integer userId) {
         return strategiesDAO.readStrategiesByUserId(userId);
+    }
+
+    public void deleteStrategyByStrategyIdAndUserId(StrategiesDTO strategy, Integer userId) {
+
+        Integer strategyId = strategy.getStrategyId();
+
+        strategiesDAO.deleteStrategyByStrategyIdAndUserId(strategyId, userId);
     }
 }
