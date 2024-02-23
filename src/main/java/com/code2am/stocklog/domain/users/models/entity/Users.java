@@ -31,7 +31,6 @@ public class Users {
     private Integer capital;
 
     @Column(name = "SOCIAL")
-    @Nullable
     private String social;
 
     @Column(name = "CREATED_DATE")

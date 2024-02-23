@@ -1,12 +1,12 @@
 package com.code2am.stocklog.domain.users.service;
 
-import com.code2am.stocklog.domain.users.models.dto.UsersDTO;
 import com.code2am.stocklog.domain.users.models.entity.Users;
-import org.springframework.beans.factory.annotation.Value;
+import com.code2am.stocklog.domain.users.repository.UsersRepositotory;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDateTime;
+import java.util.Optional;
 
 @Service
 public class UsersService {
@@ -18,9 +18,11 @@ public class UsersService {
 //    private String kakaoRedirect;
 
     private final BCryptPasswordEncoder encoder;
+    private final UsersRepositotory usersRepositotory;
 
-    public UsersService(BCryptPasswordEncoder encoder) {
+    public UsersService(BCryptPasswordEncoder encoder, UsersRepositotory usersRepositotory) {
         this.encoder = encoder;
+        this.usersRepositotory = usersRepositotory;
     }
 
     // 자체 회원가입
@@ -31,11 +33,16 @@ public class UsersService {
         user.setStatus("Y");
         // 생성시간 현재 시간으로 지정
         user.setCreateDate(LocalDateTime.now());
+        user.setSocial("자체 회원가입");
+        user.setCapital(100);
+
+        Users createAccount = usersRepositotory.save(user);
         return user;
     }
 
-//    public UsersDTO readUserByUserId(String userId){
-//
-//    }
+    public Optional<Users> readUserByUserId(String email){
+        Optional<Users> user = usersRepositotory.readUsersByEmail(email);
+        return user;
+    }
 
 }
