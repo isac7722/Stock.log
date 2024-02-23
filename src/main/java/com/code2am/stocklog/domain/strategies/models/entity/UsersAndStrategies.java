@@ -7,7 +7,7 @@ import lombok.Data;
 
 @Entity
 @IdClass(UsersAndStrategiesId.class) // 복합키 사용을 위한 식별자 클래스
-@Table(name = "TBL_USER_AND_STRATEGIES")
+@Table(name = "TBL_USERS_AND_STRATEGIES")
 @Data
 public class UsersAndStrategies {
 

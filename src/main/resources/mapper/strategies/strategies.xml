@@ -36,4 +36,17 @@
         WHERE
             STRATEGY_NAME = #{strategyName}
     </select>
+
+    <select id="readStrategiesByUserId" resultMap="Strategies">
+        SELECT
+            *
+        FROM
+            TBL_STRATEGIES AS S
+        JOIN
+            TBL_USERS_AND_STRATEGIES AS US ON (S.STRATEGY_ID = US.STRATEGY_ID)
+        WHERE
+            US.USER_ID = #{userId}
+            AND
+            STRATEGY_STATUS = 'Y'
+    </select>
 </mapper>

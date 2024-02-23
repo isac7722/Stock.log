@@ -1,6 +1,7 @@
 package com.code2am.stocklog.domain.strategies.controller;
 
 import com.code2am.stocklog.domain.strategies.models.dto.StrategiesDTO;
+import com.code2am.stocklog.domain.strategies.models.dto.UsersIdDTO;
 import com.code2am.stocklog.domain.strategies.service.StrategiesService;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.Parameter;
@@ -78,4 +79,16 @@ public class StrategiesController {
         strategiesService.deleteStrategyByStrategyId(strategy);
     }
 
+    @Operation(
+            summary = "사용자용, 매매전략 조회",
+            description = "사용자가 자신의 매매전략을 조회합니다.",
+            tags = {"GET"}
+    )
+    @GetMapping("/user")
+    public List<StrategiesDTO> readStrategiesByUserId(@RequestBody UsersIdDTO user){ // 매매변수는 추후에 수정가능성이 있음
+
+        Integer userId = user.getUserId();
+
+        return strategiesService.readStrategiesByUserId(userId);
+    }
 }

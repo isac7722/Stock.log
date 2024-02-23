@@ -94,4 +94,8 @@ public class StrategiesService {
     public StrategiesDTO readStrategyByStrategyName(String strategyName){
         return strategiesDAO.readStrategyByStrategyName(strategyName);
     }
+
+    public List<StrategiesDTO> readStrategiesByUserId(Integer userId) {
+        return strategiesDAO.readStrategiesByUserId(userId);
+    }
 }

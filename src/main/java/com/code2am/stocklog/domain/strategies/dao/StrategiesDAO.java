@@ -12,4 +12,6 @@ public interface StrategiesDAO {
     StrategiesDTO readStrategyByStrategyId(Integer strategyId);
 
     StrategiesDTO readStrategyByStrategyName(String strategyName);
+
+    List<StrategiesDTO> readStrategiesByUserId(Integer userId);
 }
