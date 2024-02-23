@@ -66,6 +66,9 @@ public class Journal {
     @OneToMany(cascade = CascadeType.PERSIST, mappedBy = "journalId")
     private List<Trade> trades = new ArrayList<>();
 
+    @OneToMany(cascade = CascadeType.PERSIST, mappedBy = "journalId")
+    private List<Journal> journals = new ArrayList<>();
+
 
 
 

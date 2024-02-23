@@ -93,6 +93,8 @@ public class JournalsController {
         // 새 매매일지를 등록
         journalsService.createJournal(newJournal);
 
+
+
         return ResponseEntity.ok(newJournal);
     }
 

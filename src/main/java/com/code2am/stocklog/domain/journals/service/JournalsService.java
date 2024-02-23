@@ -6,6 +6,8 @@ import com.code2am.stocklog.domain.journals.model.entitiy.Journal;
 import com.code2am.stocklog.domain.journals.model.entitiy.Trade;
 import com.code2am.stocklog.domain.journals.repository.JournalsRepository;
 import com.code2am.stocklog.domain.journals.repository.TradesRepository;
+import com.code2am.stocklog.domain.notes.models.dto.NotesDTO;
+import com.code2am.stocklog.domain.notes.service.NotesService;
 import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -22,6 +24,9 @@ public class JournalsService {
     @Autowired
     TradesRepository tradesRepository;
 
+    @Autowired
+    NotesService notesService;
+
     // 새 매매일지를 등록하는 매소드
     @Transactional
     public void createJournal(JournalDTO journalDTO) {
@@ -31,6 +36,13 @@ public class JournalsService {
 
         // 반환 받은 매매일지의 pk를 기준으로 매매기록(들)을 저장한다
         List<Trade> result = tradesRepository.saveAll(createTrades(savedJournal));
+
+        // 반환 받은 매매일지의 pk를 기준으로 매매노트(들)을 저장한다
+        List<NotesDTO> notesDTOS = journalDTO.getNotes();
+        for( NotesDTO notesDTO : notesDTOS){
+            notesDTO.setJournalId(savedJournal.getJournalId());
+            notesService.createNoteByJournalId(notesDTO);
+        }
 
     }
 
