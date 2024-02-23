@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.code2am.stocklog.domain.journals.dao.TradesDAO">
+
+    <resultMap id="Trades" type="com.code2am.stocklog.domain.journals.model.dto.TradeDTO">
+        <id property="tradeId" column="TRADE_ID"/>
+        <result property="journalId" column="JOURNAL_ID"/>
+        <result property="status" column="STATUS"/>
+        <result property="tradeDate" column="TRADED_DATE"/>
+        <result property="price" column="PRICE"/>
+        <result property="quantity" column="QUANTITY"/>
+        <result property="activateStatus" column="ACTIVATE_STATUS"/>
+    </resultMap>
+
+    <select id="readTradesByJournalId" resultMap="Trades">
+        SELECT
+            *
+          FROM
+            TBL_TRADES
+         WHERE
+            JOURNAL_ID = #{journalId}
+           AND
+            ACTIVATE_STATUS = 'Y'
+    </select>
+</mapper>
