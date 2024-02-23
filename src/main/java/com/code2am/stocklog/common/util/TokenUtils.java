@@ -4,6 +4,7 @@ import com.code2am.stocklog.domain.users.models.entity.Users;
 import io.jsonwebtoken.*;
 import jakarta.xml.bind.DatatypeConverter;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Component;
 
 import javax.crypto.spec.SecretKeySpec;
@@ -17,8 +18,8 @@ public class TokenUtils {
     private static String jwtSecretKey;
     private static Long tokenValidateTime;
 
-    @Value("${kakao.client-id")
-    public String apiKey;
+//    @Value("${kakao.client-id")
+//    public String apiKey;
 
     @Value("${jwt.key}")
     public void setJwtSecretKey(String jwtSecretKey) {
