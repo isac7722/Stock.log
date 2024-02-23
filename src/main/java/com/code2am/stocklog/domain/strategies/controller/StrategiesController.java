@@ -1,6 +1,7 @@
 package com.code2am.stocklog.domain.strategies.controller;
 
 import com.code2am.stocklog.domain.strategies.models.dto.StrategiesDTO;
+import com.code2am.stocklog.domain.strategies.models.dto.UsersIdDTO;
 import com.code2am.stocklog.domain.strategies.service.StrategiesService;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.Parameter;
@@ -58,18 +59,49 @@ public class StrategiesController {
     @Operation(
             summary = "매매전략을 조회",
             description = "모든 매매전략을 조회합니다.",
-            tags = {"GET"}
+            tags = {"GET", "관리자"}
     )
     @GetMapping
     public List<StrategiesDTO> readStrategies(){
-
+        // 관리자용 조회(관리자는 조회와 삭제만 가능하도록)
         return strategiesService.readStrategies();
     }
 
+    @Operation(
+            summary = "관리자용, 매매전략을 삭제",
+            description = "관리자가 매매전략을 삭제합니다.",
+            tags = {"DELETE", "관리자"}
+    )
+    @Parameter(name = "strategy", description = "관리자가 삭제할 매매전략")
     @DeleteMapping
     public void deleteStrategyByStrategyId(@RequestBody StrategiesDTO strategy){
-
+        // 관리자용 삭제
         strategiesService.deleteStrategyByStrategyId(strategy);
     }
 
+    @Operation(
+            summary = "사용자용, 매매전략 조회",
+            description = "사용자가 자신의 매매전략을 조회합니다.",
+            tags = {"GET"}
+    )
+    @GetMapping("/user")
+    public List<StrategiesDTO> readStrategiesByUserId(@RequestBody UsersIdDTO user){ // 매개변수는 추후에 수정
+
+        Integer userId = user.getUserId();
+
+        return strategiesService.readStrategiesByUserId(userId);
+    }
+
+    @Operation(
+            summary = "사용자용, 매매전략 삭제",
+            description = "사용자가 자신의 매매전략을 삭제합니다. 실제 동작에 있어서는 관계만을 끊는 것으로 DB의 데이터를 손상시키지 않습니다.",
+            tags = {"DELETE"}
+    )
+    @DeleteMapping("/delete")
+    public void deleteStrategyByStrategyIdAndUserId(@RequestBody StrategiesDTO strategy){ // 매개변수는 추후 수정
+
+        Integer userId = 1;
+
+        strategiesService.deleteStrategyByStrategyIdAndUserId(strategy, userId);
+    }
 }
