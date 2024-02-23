@@ -1,34 +1,41 @@
 package com.code2am.stocklog.domain.users.service;
 
+import com.code2am.stocklog.domain.users.models.dto.UsersDTO;
 import com.code2am.stocklog.domain.users.models.entity.Users;
-import com.code2am.stocklog.domain.users.repository.UsersRepository;
-import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDateTime;
+
 @Service
 public class UsersService {
-    private UsersRepository usersRepository;
 
-    private BCryptPasswordEncoder encoder;
+//    @Value("${spring.security.oauth2.client.registration.kakao.client-id}")
+//    private String kakaoApiKey;
+//
+//    @Value("${kakao.redirect-uri}")
+//    private String kakaoRedirect;
 
-    public UsersService(UsersRepository usersRepository, BCryptPasswordEncoder encoder) {
-        this.usersRepository = usersRepository;
+    private final BCryptPasswordEncoder encoder;
+
+    public UsersService(BCryptPasswordEncoder encoder) {
         this.encoder = encoder;
     }
 
+    // 자체 회원가입
     public Users createAccount(Users user){
+        // 비밀번호 암호화
         user.setPassword(encoder.encode(user.getPassword()));
+        // 유저 상태 지정
         user.setStatus("Y");
-
-        Users signUp = usersRepository.save(user);
-
-        return signUp;
+        // 생성시간 현재 시간으로 지정
+        user.setCreateDate(LocalDateTime.now());
+        return user;
     }
 
-//    public Users createAccountByKakao(Users user){
+//    public UsersDTO readUserByUserId(String userId){
 //
 //    }
-
 
 }

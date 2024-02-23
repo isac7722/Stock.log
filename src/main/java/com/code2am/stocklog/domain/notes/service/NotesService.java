@@ -8,6 +8,8 @@ import com.code2am.stocklog.domain.notes.repository.NotesRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.List;
 import java.util.Objects;
 
@@ -22,10 +24,13 @@ public class NotesService {
 
     public Notes createNoteByJournalId(NotesDTO notesDTO) {
 
+        // journalId를 통해 매매일지가 존재하는지 확인하는 검사 필요
+
         Notes newNote = new Notes();
         newNote.setNoteContents(notesDTO.getNoteContents());
-        newNote.setNoteDate(notesDTO.getNoteDate());
+        newNote.setNoteDate(LocalDateTime.now());
         newNote.setNoteStatus("Y");
+        newNote.setJournalId(notesDTO.getJournalId());
         notesRepository.save(newNote);
 
         return newNote;
@@ -56,6 +61,7 @@ public class NotesService {
         deleteNote.setNoteContents(notesDTO.getNoteContents());
         deleteNote.setNoteDate(notesDTO.getNoteDate());
         deleteNote.setNoteStatus("N");
+        deleteNote.setJournalId(notesDTO.getJournalId());
         notesRepository.save(deleteNote);
     }
 }
