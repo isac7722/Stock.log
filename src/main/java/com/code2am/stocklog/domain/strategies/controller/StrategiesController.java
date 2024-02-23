@@ -58,11 +58,11 @@ public class StrategiesController {
     @Operation(
             summary = "매매전략을 조회",
             description = "모든 매매전략을 조회합니다.",
-            tags = {"GET"}
+            tags = {"GET", "관리자"}
     )
     @GetMapping
     public List<StrategiesDTO> readStrategies(){
-
+        // 관리자용 조회(관리자는 조회와 삭제만 가능하도록)
         return strategiesService.readStrategies();
     }
 
