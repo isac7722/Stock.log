@@ -10,6 +10,7 @@ import com.code2am.stocklog.domain.journals.repository.TradesRepository;
 import com.code2am.stocklog.domain.notes.dao.NotesDAO;
 import com.code2am.stocklog.domain.journals.dao.TradesDAO;
 import com.code2am.stocklog.domain.notes.models.dto.NotesDTO;
+import com.code2am.stocklog.domain.notes.models.entity.Notes;
 import com.code2am.stocklog.domain.notes.models.vo.NotesVo;
 import com.code2am.stocklog.domain.notes.service.NotesService;
 import jakarta.transaction.Transactional;
@@ -48,7 +49,7 @@ public class JournalsService {
         Journal savedJournal = journalsRepository.save(convertToJournal(journalDTO));
 
         // 반환 받은 매매일지의 pk를 기준으로 매매기록(들)을 저장한다
-        List<Trade> result = tradesRepository.saveAll(createTrades(savedJournal));
+        tradesRepository.saveAll(createTrades(savedJournal));
 
         // 반환 받은 매매일지의 pk를 기준으로 매매노트(들)을 저장한다
         List<NotesDTO> notesDTOS = journalDTO.getNotes();
@@ -84,6 +85,53 @@ public class JournalsService {
 
         return journals;
     }
+
+
+    // 매매일지를 지우는 매소드
+    @Transactional
+    public String deleteJournalByJournalId(JournalDTO journal) {
+
+        Journal deleteJournal = convertToJournal(journal);
+
+        // 해당 매매일지의 매매기록들의 상태를 변환한다
+        List<Trade> deleteTrades = deleteJournal.getTrades();
+
+        for (Trade trade : deleteTrades) {
+            trade.setActivateStatus("N");
+        }
+
+        tradesRepository.saveAll(deleteTrades);
+
+        // 해당 매매일지의 매매노트들의 상태를 변환한다
+        List<NotesDTO> deleteNotes = journal.getNotes();
+
+        for (NotesDTO note : deleteNotes){
+            notesService.deleteNoteByNoteId(note);
+        }
+
+        // 매매일지의 상태를 변환한다
+        deleteJournal.setStatus("N");
+
+        journalsRepository.save(deleteJournal);
+
+        return "삭제 성공";
+    }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
     public List<Trade> createTrades(Journal journal){
@@ -137,6 +185,7 @@ public class JournalsService {
         trade.setActivateStatus("Y");
         return trade;
     }
+
 
 
 }

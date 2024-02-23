@@ -90,7 +90,6 @@ public class JournalsController {
         // 새 매매일지를 등록
         journalsService.createJournal(newJournal);
 
-
         return ResponseEntity.ok(newJournal);
     }
 
@@ -109,16 +108,40 @@ public class JournalsController {
     @GetMapping("/search/{userId}")
     public ResponseEntity <List<JournalDTO>> readJournalsByUserId(@PathVariable("userId") int userId) {
 
-        System.out.println("유저 아이디는 받았다: "+userId);
-
         List<JournalDTO> journals = journalsService.readJournalsByUserId(userId);
 
+        System.out.println(journals);
         return ResponseEntity.ok(journals);
     }
 
     /* 매매일지 수정 */
 
+
+
     /* 매매일지 삭제 */
+    @Operation(
+            summary = "매매일지 삭제",
+            description = "사용자의 매매일지를 삭제합니다",
+            tags = {"JournalsController","get","Journals"}
+    )
+    @ApiResponses(value = {
+            @ApiResponse(responseCode = "200", description = "매매일지를 성공적으로 삭제함."),
+            @ApiResponse(responseCode = "404", description = "요청에 필요한 값이 정상적으로 조회되지 않음."),
+            @ApiResponse(responseCode = "500", description = "요청받은 서버가 정상적으로 동작하지 않음.")
+    })
+    @Parameter(name = "deleteJournal", description = "삭제할 매매일지")
+    @DeleteMapping("/delete")
+    public ResponseEntity <String> deleteJournalByJournalId(@RequestBody JournalDTO journal) {
+
+        System.out.println("데이터 들어옴");
+        System.out.println(journal);
+
+        // 실제로는 삭제 메카니즘이 아니라 상태를 수정함
+        String message = journalsService.deleteJournalByJournalId(journal);
+
+
+        return ResponseEntity.ok(message);
+    }
 
 
 
