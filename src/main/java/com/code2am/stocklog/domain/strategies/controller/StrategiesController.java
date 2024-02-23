@@ -66,9 +66,15 @@ public class StrategiesController {
         return strategiesService.readStrategies();
     }
 
+    @Operation(
+            summary = "관리자용, 매매전략을 삭제",
+            description = "관리자가 매매전략을 삭제합니다.",
+            tags = {"DELETE", "관리자"}
+    )
+    @Parameter(name = "strategy", description = "관리자가 삭제할 매매전략")
     @DeleteMapping
     public void deleteStrategyByStrategyId(@RequestBody StrategiesDTO strategy){
-
+        // 관리자용 삭제
         strategiesService.deleteStrategyByStrategyId(strategy);
     }
 
