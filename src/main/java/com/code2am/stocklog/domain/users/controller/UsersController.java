@@ -36,7 +36,7 @@ public class UsersController {
             @ApiResponse(responseCode = "404", description = "요청에 필요한 값이 잘못 입력되었습니다."),
             @ApiResponse(responseCode = "500", description = "서버에서 오류가 발생되었습니다")
     })
-    @PostMapping("/create")
+    @PostMapping("/signup")
     public ResponseEntity createAccount(@RequestBody Users user){
 
         Users signUp = usersServices.createAccount(user);
@@ -61,8 +61,6 @@ public class UsersController {
         Authentication authentication = authenticationManager.authenticate(
                 new UsernamePasswordAuthenticationToken(loginDTO.getEmail(), loginDTO.getPassword())
         );
-
-        // 인증 성공시 토큰 생성
 
         return ResponseEntity.ok(authentication);
     }
