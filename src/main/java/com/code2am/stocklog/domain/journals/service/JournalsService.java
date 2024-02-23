@@ -1,12 +1,16 @@
 package com.code2am.stocklog.domain.journals.service;
 
+import com.code2am.stocklog.domain.journals.dao.JournalsDAO;
 import com.code2am.stocklog.domain.journals.model.dto.JournalDTO;
 import com.code2am.stocklog.domain.journals.model.dto.TradeDTO;
 import com.code2am.stocklog.domain.journals.model.entitiy.Journal;
 import com.code2am.stocklog.domain.journals.model.entitiy.Trade;
 import com.code2am.stocklog.domain.journals.repository.JournalsRepository;
 import com.code2am.stocklog.domain.journals.repository.TradesRepository;
+import com.code2am.stocklog.domain.notes.dao.NotesDAO;
+import com.code2am.stocklog.domain.journals.dao.TradesDAO;
 import com.code2am.stocklog.domain.notes.models.dto.NotesDTO;
+import com.code2am.stocklog.domain.notes.models.vo.NotesVo;
 import com.code2am.stocklog.domain.notes.service.NotesService;
 import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -27,6 +31,15 @@ public class JournalsService {
     @Autowired
     NotesService notesService;
 
+    @Autowired
+    JournalsDAO journalsDAO;
+
+    @Autowired
+    TradesDAO tradesDAO;
+
+    @Autowired
+    NotesDAO notesDAO;
+
     // 새 매매일지를 등록하는 매소드
     @Transactional
     public void createJournal(JournalDTO journalDTO) {
@@ -44,6 +57,32 @@ public class JournalsService {
             notesService.createNoteByJournalId(notesDTO);
         }
 
+    }
+
+
+    // 유저의 매매일지를 조회하는 매소드
+    @Transactional
+    public List<JournalDTO> readJournalsByUserId(Integer userId){
+
+        List<JournalDTO> journals = journalsDAO.readJournalsByUserId(userId);
+
+        System.out.println("journals: "+journals);
+
+        // 매매일지에 관련된 매매기록을 가져온다
+        for (JournalDTO journal : journals){
+            List<TradeDTO> trades = tradesDAO.readTradesByJournalId(journal.getJournalId());
+
+            journal.setTrades(trades);
+        }
+
+        // 매매일지에 관련된 노트를 가져온다
+        for (JournalDTO journal : journals){
+            List<NotesVo> notes = notesDAO.readNotesByJournalId(journal.getJournalId());
+
+            journal.setNotesVo(notes);
+        }
+
+        return journals;
     }
 
 
@@ -71,7 +110,7 @@ public class JournalsService {
         journal.setSellPrice(journalDTO.getSellPrice());
         journal.setSellQty(journalDTO.getSellQty());
         journal.setProfit(journalDTO.getProfit());
-        journal.setStatus(journalDTO.getStatus());
+        journal.setStatus("Y");
         journal.setUserId(journalDTO.getUserId());
         journal.setStrategyId(journalDTO.getStrategyId());
 
@@ -95,7 +134,7 @@ public class JournalsService {
         trade.setTradeDate(tradeDTO.getTradeDate());
         trade.setPrice(tradeDTO.getPrice());
         trade.setQuantity(tradeDTO.getQuantity());
-        trade.setActivateStatus(tradeDTO.getActivateStatus());
+        trade.setActivateStatus("Y");
         return trade;
     }
 

@@ -1,6 +1,9 @@
 package com.code2am.stocklog.domain.journals.model.dto;
 
 import com.code2am.stocklog.domain.notes.models.dto.NotesDTO;
+import com.code2am.stocklog.domain.notes.models.vo.NotesVo;
+import com.code2am.stocklog.domain.strategies.models.dto.StrategiesDTO;
+import com.code2am.stocklog.domain.strategies.models.entity.Strategies;
 import lombok.Data;
 
 import java.time.LocalDateTime;
@@ -49,9 +52,14 @@ public class JournalDTO {
 
 
     // 매매기록
-    List<TradeDTO> trades;
+    private List<TradeDTO> trades;
 
     // 매매노트
-    List<NotesDTO> notes;
+    private List<NotesDTO> notes;
+    private List<NotesVo> notesVo;
+
+
+    // 매매전략
+    private StrategiesDTO strategy;
 
 }

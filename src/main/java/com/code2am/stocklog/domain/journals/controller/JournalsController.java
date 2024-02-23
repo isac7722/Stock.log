@@ -11,12 +11,10 @@ import io.swagger.v3.oas.annotations.tags.Tag;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.context.SecurityContextHolder;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.time.LocalDateTime;
+import java.util.List;
 import java.util.OptionalDouble;
 import java.util.OptionalInt;
 
@@ -41,7 +39,7 @@ public class JournalsController {
             @ApiResponse(responseCode = "404", description = "요청에 필요한 값이 정상적으로 입력되지 앟음."),
             @ApiResponse(responseCode = "500", description = "요청받은 서버가 정상적으로 동작하지 않음.")
     })
-    @Parameter(name = "newJournal", description = "신규로 등록할 매매일지")
+    @Parameter(name = "createJournal", description = "신규로 등록할 매매일지")
     @PostMapping
     public ResponseEntity<JournalDTO> createJournal(@RequestBody JournalDTO newJournal){
 
@@ -89,16 +87,34 @@ public class JournalsController {
         /* 수익률 입력 */
         newJournal.setProfit(getProfit(newJournal));
 
-
         // 새 매매일지를 등록
         journalsService.createJournal(newJournal);
-
 
 
         return ResponseEntity.ok(newJournal);
     }
 
     /* 매매일지 조회 */
+    @Operation(
+            summary = "매매일지 조회",
+            description = "사용자의 매매일지를 조회합니다",
+            tags = {"JournalsController","get","Journals"}
+    )
+    @ApiResponses(value = {
+            @ApiResponse(responseCode = "200", description = "매매일지를 성공적으로 조회함."),
+            @ApiResponse(responseCode = "404", description = "요청에 필요한 값이 정상적으로 조회되지 않음."),
+            @ApiResponse(responseCode = "500", description = "요청받은 서버가 정상적으로 동작하지 않음.")
+    })
+    @Parameter(name = "searchJournal", description = "조회할 매매일지")
+    @GetMapping("/search/{userId}")
+    public ResponseEntity <List<JournalDTO>> readJournalsByUserId(@PathVariable("userId") int userId) {
+
+        System.out.println("유저 아이디는 받았다: "+userId);
+
+        List<JournalDTO> journals = journalsService.readJournalsByUserId(userId);
+
+        return ResponseEntity.ok(journals);
+    }
 
     /* 매매일지 수정 */
 
