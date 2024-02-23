@@ -69,6 +69,7 @@ public class Journal {
 
 
 
+
     /* 현재 매매일지와 연관이 있는 매매기록들 */
 //    @JsonIgnore
 //    @OneToMany(cascade = CascadeType.PERSIST, mappedBy = "journalCode")
