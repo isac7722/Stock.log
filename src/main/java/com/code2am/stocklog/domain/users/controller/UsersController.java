@@ -1,5 +1,7 @@
 package com.code2am.stocklog.domain.users.controller;
 
+import com.code2am.stocklog.common.util.TokenUtils;
+import com.code2am.stocklog.domain.users.models.dto.LoginDTO;
 import com.code2am.stocklog.domain.users.models.entity.Users;
 import com.code2am.stocklog.domain.users.service.UsersService;
 import io.swagger.v3.oas.annotations.Operation;
@@ -8,6 +10,9 @@ import io.swagger.v3.oas.annotations.responses.ApiResponses;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.authentication.AuthenticationManager;
+import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
+import org.springframework.security.core.Authentication;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.Objects;
@@ -19,6 +24,9 @@ public class UsersController {
 
     @Autowired
     private UsersService usersServices;
+
+    @Autowired
+    private AuthenticationManager authenticationManager;
 
     @Operation(
             summary = "회원가입",
@@ -39,18 +47,23 @@ public class UsersController {
         return ResponseEntity.ok(signUp);
     }
 
-//    @Operation(
-//            summary = "자체 로그인",
-//            description = "등록된 회원이 로그인")
-//    @ApiResponses(value = {
-//            @ApiResponse(responseCode = "200", description = "로그인이 완료되었습니다."),
-//            @ApiResponse(responseCode = "404", description = "잘못된 값이 입력되었습니다."),
-//            @ApiResponse(responseCode = "500", description = "서버에서 오류가 되었습니다.")
-//    })
-//    @PostMapping("/login")
-//    public ResponseEntity loginAccount(@RequestParam String email){
-//
-//    }
+    @Operation(
+            summary = "자체 로그인",
+            description = "등록된 회원이 로그인")
+    @ApiResponses(value = {
+            @ApiResponse(responseCode = "200", description = "로그인이 완료되었습니다."),
+            @ApiResponse(responseCode = "404", description = "잘못된 값이 입력되었습니다."),
+            @ApiResponse(responseCode = "500", description = "서버에서 오류가 되었습니다.")
+    })
+    @PostMapping("/login")
+    public ResponseEntity loginUsers(@RequestBody LoginDTO loginDTO) {
+        // 사용자 인증
+        Authentication authentication = authenticationManager.authenticate(
+                new UsernamePasswordAuthenticationToken(loginDTO.getEmail(), loginDTO.getPassword())
+        );
 
+        // 인증 성공시 토큰 생성
 
+        return ResponseEntity.ok(authentication);
+    }
 }

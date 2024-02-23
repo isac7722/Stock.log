@@ -1,9 +1,7 @@
 package com.code2am.stocklog.domain.users.service;
 
-import com.code2am.stocklog.domain.users.models.dto.UsersDTO;
 import com.code2am.stocklog.domain.users.models.entity.Users;
-import com.code2am.stocklog.domain.users.models.entity.UsersRepositotory;
-import org.springframework.beans.factory.annotation.Value;
+import com.code2am.stocklog.domain.users.repository.UsersRepositotory;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
@@ -35,6 +33,10 @@ public class UsersService {
         user.setStatus("Y");
         // 생성시간 현재 시간으로 지정
         user.setCreateDate(LocalDateTime.now());
+        user.setSocial("자체 회원가입");
+        user.setCapital(100);
+
+        Users createAccount = usersRepositotory.save(user);
         return user;
     }
 
@@ -42,5 +44,7 @@ public class UsersService {
         Optional<Users> user = usersRepositotory.readUsersByEmail(email);
         return user;
     }
+
+
 
 }
