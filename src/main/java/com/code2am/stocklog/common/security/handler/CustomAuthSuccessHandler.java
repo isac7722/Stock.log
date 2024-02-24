@@ -1,8 +1,6 @@
 package com.code2am.stocklog.common.security.handler;
 
 import com.code2am.stocklog.common.util.ConvertUtil;
-import com.code2am.stocklog.common.util.TokenUtils;
-import com.code2am.stocklog.domain.users.models.DetailUser;
 import com.code2am.stocklog.domain.users.models.entity.Users;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServletRequest;

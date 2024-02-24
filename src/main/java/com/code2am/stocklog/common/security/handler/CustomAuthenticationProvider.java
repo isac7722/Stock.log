@@ -1,8 +1,5 @@
 package com.code2am.stocklog.common.security.handler;
 
-import com.code2am.stocklog.domain.users.models.DetailUser;
-import com.code2am.stocklog.domain.users.service.DetailUserService;
-import com.code2am.stocklog.domain.users.service.UsersService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.AuthenticationProvider;
 import org.springframework.security.authentication.BadCredentialsException;
