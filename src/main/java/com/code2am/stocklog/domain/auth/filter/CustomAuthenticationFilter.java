@@ -1,4 +1,4 @@
-package com.code2am.stocklog.common.filter;
+package com.code2am.stocklog.domain.auth.filter;
 
 import com.code2am.stocklog.domain.users.models.dto.LoginDTO;
 import com.fasterxml.jackson.core.JsonParser;

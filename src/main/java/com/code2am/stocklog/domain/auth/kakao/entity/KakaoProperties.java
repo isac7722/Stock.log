@@ -1,4 +1,4 @@
-package com.code2am.stocklog.common.security;
+package com.code2am.stocklog.domain.auth.kakao.entity;
 
 import lombok.Data;
 import org.springframework.boot.context.properties.ConfigurationProperties;

@@ -1,15 +1,15 @@
 package com.code2am.stocklog.domain.users.models.entity;
 
-import jakarta.annotation.Nullable;
+import com.code2am.stocklog.domain.auth.enums.UserRole;
 import jakarta.persistence.*;
-import lombok.Data;
-import lombok.Getter;
-import lombok.Setter;
+import lombok.*;
 
 import java.time.LocalDateTime;
 
-@Data
 @Entity
+@Getter
+@Setter
+@NoArgsConstructor
 @Table(name = "TBL_USERS")
 public class Users {
 
@@ -35,4 +35,19 @@ public class Users {
 
     @Column(name = "CREATED_DATE")
     private LocalDateTime createDate;
+
+    // 유저 권한
+    @Enumerated(EnumType.STRING)
+    private UserRole userRole;
+
+    @Builder
+    public Users(String email, String password, String status, Integer capital, String social, LocalDateTime createDate, UserRole userRole) {
+        this.email = email;
+        this.password = password;
+        this.status = status;
+        this.capital = capital;
+        this.social = social;
+        this.createDate = createDate;
+        this.userRole = UserRole.ROLE_USER;
+    }
 }
