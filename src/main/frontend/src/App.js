@@ -5,15 +5,18 @@ import Calendar from "./pages/Calendar";
 import Journals from "./pages/Journals";
 import Settings from "./pages/Settings";
 import Admin from "./pages/Admin";
+import Login from "./pages/Login";
+import Signup from "./pages/Signup";
+import FindPass from "./pages/FindPass";
 
 function App() {
   return (
     <>
       <BrowserRouter>
         <Routes>
-          <Route path={"/login"}>
-
-          </Route>
+          <Route path={"/login"} element={<Login/>}></Route>
+          <Route path={"/signup"} element={<Signup/>}></Route>
+          <Route path={"/findpass"} element={<FindPass/>}></Route>
           <Route path={"/"} element={<Layout/>}>
             <Route path={"main"} element={<Main/>}/>
             <Route path={"calendar"}>
