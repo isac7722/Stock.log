@@ -2,16 +2,14 @@ import FullCalendar from "@fullcalendar/react";
 import multiMonthPlugin from "@fullcalendar/multimonth";
 import interactionPlugin from "@fullcalendar/interaction"
 import {useNavigate} from "react-router-dom";
-import axios from "axios";
-
 const Calendar = () => {
 
     const navigate = useNavigate();
 
     const linkToMonthHandler = (info) => {
-        const month = info.getMonth() + 1; // 특정 월
-        alert(month);
-        navigate("/calendar/" + month);
+        const year = info.getFullYear();
+        const month = info.getMonth() + 1;
+        navigate(`/calendar/${year}/${month}`);
     }
 
 
@@ -25,9 +23,6 @@ const Calendar = () => {
                     center:"title",
                     start:"prev",
                     end:"next"
-                }}
-                footerToolbar={{
-                    center:"today"
                 }}
                 navLinks={true}
                 navLinkDayClick={linkToMonthHandler}
