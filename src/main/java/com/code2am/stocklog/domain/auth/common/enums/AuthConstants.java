@@ -1,4 +1,4 @@
-package com.code2am.stocklog.domain.auth.enums;
+package com.code2am.stocklog.domain.auth.common.enums;
 
 public class AuthConstants {
     public static final String AUTH_HEADER = "Authorization";

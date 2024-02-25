@@ -1,4 +1,4 @@
-package com.code2am.stocklog.domain.auth.service;
+package com.code2am.stocklog.domain.auth.common.service;
 
 import com.code2am.stocklog.domain.users.models.entity.Users;
 import com.code2am.stocklog.domain.users.repository.UsersRepository;

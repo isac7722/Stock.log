@@ -1,6 +1,6 @@
 package com.code2am.stocklog.domain.users.models.entity;
 
-import com.code2am.stocklog.domain.auth.enums.UserRole;
+import com.code2am.stocklog.domain.auth.common.enums.UserRole;
 import jakarta.persistence.*;
 import lombok.*;
 
@@ -39,6 +39,7 @@ public class Users {
     // 유저 권한
     @Enumerated(EnumType.STRING)
     private UserRole userRole;
+
 
     @Builder
     public Users(String email, String password, String status, Integer capital, String social, LocalDateTime createDate, UserRole userRole) {

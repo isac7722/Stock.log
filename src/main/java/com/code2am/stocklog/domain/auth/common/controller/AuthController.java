@@ -1,8 +1,8 @@
-package com.code2am.stocklog.domain.auth.controller;
+package com.code2am.stocklog.domain.auth.common.controller;
 
-import com.code2am.stocklog.domain.auth.enums.AuthConstants;
+import com.code2am.stocklog.domain.auth.common.enums.AuthConstants;
 import com.code2am.stocklog.domain.auth.jwt.model.dto.TokenDTO;
-import com.code2am.stocklog.domain.auth.service.AuthService;
+import com.code2am.stocklog.domain.auth.common.service.AuthService;
 import com.code2am.stocklog.domain.users.models.dto.UserDTO;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpHeaders;
@@ -26,10 +26,8 @@ public class AuthController {
 
     @PostMapping("/login")
     public ResponseEntity<TokenDTO> login(@RequestBody UserDTO memberRequestDto) {
-        System.out.println("진입");
         TokenDTO tokenDto = authService.login(memberRequestDto);
 
-        System.out.println("탈출");
         return ResponseEntity.ok()
                 .header(HttpHeaders.AUTHORIZATION, AuthConstants.TOKEN_TYPE+ tokenDto.getAccessToken())
                 .body(tokenDto);
