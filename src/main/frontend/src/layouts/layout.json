@@ -1,0 +1,22 @@
+[
+  {
+    "url": "/main",
+    "name": "메인화면"
+  },
+  {
+    "url": "/journals",
+    "name": "매매일지"
+  },
+  {
+    "url": "/calendar",
+    "name": "캘린더"
+  },
+  {
+    "url": "/trader",
+    "name": "트레이더스"
+  },
+  {
+    "url": "/settings",
+    "name": "설정"
+  }
+]

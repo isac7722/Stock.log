@@ -3,13 +3,13 @@ import Header from "../components/Header";
 import NavBar from "../components/NavBar";
 import Footer from "../components/Footer";
 import "../css/Layout.css"
-
+import pageInfo from "../layouts/layout.json"
 const Layout = () => {
 
     return (
         <>
             <Header/>
-            <NavBar/>
+            <NavBar pageInfo={pageInfo}/>
             <Outlet/>
             <Footer/>
         </>

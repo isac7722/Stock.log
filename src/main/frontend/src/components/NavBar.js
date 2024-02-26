@@ -1,6 +1,12 @@
 import {Link} from "react-router-dom";
 
-const NavBar = () => {
+const NavBar = ({pageInfo}) => {
+
+    const pageInfoList = () => pageInfo.map(page => {
+        return(
+            <Link className={"navbarMenu"} to={page.url}>{page.name}</Link>
+        )
+    })
 
     return(
         <nav className={"navbar"}>
@@ -9,11 +15,7 @@ const NavBar = () => {
             </imageWrapper>
             <div className={"navbarList"}>
                 <h6 id={"navbarTitle"}>MAIN MENU</h6>
-                <Link className={"navbarMenu"} to={"/main"}>메인화면</Link>
-                <Link className={"navbarMenu"} to={"/journals"}>매매일지</Link>
-                <Link className={"navbarMenu"} to={"/calendar"}>캘린더</Link>
-                <Link className={"navbarMenu"} to={"/trader"}>트레이더스</Link>
-                <Link className={"navbarMenu"} to={"/settings"}>설정</Link>
+                {pageInfoList()}
                 <button className={"navbarMenu"} type={"button"}>Logout</button>
             </div>
 
