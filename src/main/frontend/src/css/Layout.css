@@ -39,3 +39,9 @@
     width: 84%;
     left: 16%;
 }
+
+#mainContents {
+    position: relative;
+    left: 15%;
+    width: 85%;
+}

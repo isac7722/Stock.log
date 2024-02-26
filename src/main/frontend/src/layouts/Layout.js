@@ -10,7 +10,9 @@ const Layout = () => {
         <>
             <Header pageInfo={pageInfo}/>
             <NavBar pageInfo={pageInfo}/>
-            <Outlet/>
+            <div id={"mainContents"}>
+                <Outlet/>
+            </div>
             <Footer/>
         </>
     )
