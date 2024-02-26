@@ -17,11 +17,6 @@ spring:
             token-uri: https://kauth.kakao.com/oauth/token
             user-info-uri: https://kapi.kakao.com/v2/user/me
             user-name-attribute: id
-  datasource:
-    url: jdbc:mysql://localhost:3306/stocklog
-    driver-class-name: com.mysql.cj.jdbc.Driver
-    username: stocklog
-    password: stocklog
 
   jpa:
     database: mysql
@@ -31,6 +26,11 @@ spring:
         format_sql: true
     hibernate:
       ddl-auto: create-drop
+
+  profiles:
+    include:
+      - db
+      - key
 
 mybatis:
   mapper-locations: classpath:resources/mapper/**/*.xml
