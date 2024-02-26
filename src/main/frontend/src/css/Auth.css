@@ -1,0 +1,90 @@
+.authInput{
+    width: 500px;
+    height: 50px;
+    font-size: 15px;
+    border: 0;
+    border-radius: 15px;
+    outline: none;
+    padding-left: 10px;
+    background-color: rgb(245, 245, 245);
+    box-shadow: 0px 0px 7px black;
+    margin-top: 3%;
+  }
+  
+  a {
+    color: inherit; /* 부모 요소의 텍스트 색상 상속 */
+    text-decoration: none; 
+  }
+  
+  a:hover {
+    color: gray;
+  }
+  
+  .authInput:focus{
+    outline: none;
+    box-shadow: 0 0 0 2px #B5D692;
+  }
+  
+  .authBtn{
+    background-color: #B5D692;
+    border: 0;
+    width: 250px;
+    height: 39px;
+    font-size: 15px;
+    color: white;
+    box-shadow: 0px 0px 7px black;
+    margin-top: 2%;
+  }
+  
+  .authBtn:hover{
+    color: rgb(226, 226, 226);
+  }
+  
+  .authDiv{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    height: 70vh;
+  }
+  
+  .loginCheckBox{
+    margin-right: 19%;
+    margin-top: 1%;
+  }
+  
+  .emailDiv{
+    display: flex;
+    align-items: center;
+    margin-left: 8%;
+  }
+  
+  .certificationBtn{
+    background-color: #B5D692;
+    border: 0;
+    width: 150px;
+    height: 30px;
+    font-size: 15px;
+    color: white;
+    box-shadow: 0px 0px 7px black;
+    margin-top: 4%;
+  }
+  
+  .cerBtn{
+    margin-left: 3%;
+  }
+  
+  .changePassBtn{
+    border: 0;
+    width: 250px;
+    height: 39px;
+    font-size: 15px;
+    color: white;
+    box-shadow: 0px 0px 7px black;
+    margin-top: 2%;
+  }
+  
+  .userDiv{
+    margin-top: 1%;
+  }
+  
