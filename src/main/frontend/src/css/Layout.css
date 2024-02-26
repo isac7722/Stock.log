@@ -5,6 +5,9 @@
     flex-direction: column;
     align-items: center;
     position: fixed;
+    z-index: 100;
+    background-color: white;
+    top: 0;
 }
 
 #logoBox {
@@ -17,7 +20,8 @@
 }
 
 #navbarTitle {
-    font-size: 1em;
+    font-size: 0.7em;
+    text-align: center;
 }
 
 .navbarList {
@@ -28,4 +32,10 @@
 .navbarMenu {
     margin: 0.5em;
     text-align: center;
+}
+
+.header {
+    position: relative;
+    width: 84%;
+    left: 16%;
 }

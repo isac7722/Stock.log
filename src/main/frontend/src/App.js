@@ -9,6 +9,7 @@ import MonthCalendar from "./pages/MonthCalendar";
 import Login from "./pages/Login";
 import Signup from "./pages/Signup";
 import FindPass from "./pages/FindPass";
+import "normalize.css"
 
 function App() {
   return (
@@ -19,7 +20,7 @@ function App() {
           <Route path={"/signup"} element={<Signup/>}></Route>
           <Route path={"/findpass"} element={<FindPass/>}></Route>
           <Route path={"/"} element={<Layout/>}>
-            <Route path={"main"} element={<Main/>}/>
+            <Route index element={<Main/>}/>
             <Route path={"calendar"}>
               <Route index element={<Calendar/>}/>
               <Route path={":year/:month"} element={<MonthCalendar/>}/>

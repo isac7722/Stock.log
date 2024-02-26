@@ -8,7 +8,7 @@ const Layout = () => {
 
     return (
         <>
-            <Header/>
+            <Header pageInfo={pageInfo}/>
             <NavBar pageInfo={pageInfo}/>
             <Outlet/>
             <Footer/>
