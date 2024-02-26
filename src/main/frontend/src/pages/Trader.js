@@ -1,0 +1,9 @@
+
+
+const Trader = () => {
+
+    return (
+        <>
+        </>
+    )
+}
