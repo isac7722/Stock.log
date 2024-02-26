@@ -9,17 +9,19 @@ const NavBar = ({pageInfo}) => {
     })
 
     return(
-        <nav className={"navbar"}>
-            <imageWrapper id={"logoBox"} >
-                <img id={"logo"} src={"/img/logo.png"} alt={"로고 이미지"}/>
-            </imageWrapper>
-            <div className={"navbarList"}>
-                <h6 id={"navbarTitle"}>MAIN MENU</h6>
-                {pageInfoList()}
-                <button className={"navbarMenu"} type={"button"}>Logout</button>
-            </div>
+        <>
+            <nav className={"navbar"}>
+                <div id={"logoBox"}>
+                    <img id={"logo"} src={"/img/logo.png"} alt={"로고 이미지"}/>
+                </div>
+                <div className={"navbarList"}>
+                    <h6 id={"navbarTitle"}>MAIN MENU</h6>
+                    {pageInfoList()}
+                    <button className={"navbarMenu"} type={"button"}>Logout</button>
+                </div>
 
-        </nav>
+            </nav>
+        </>
     )
 }
 

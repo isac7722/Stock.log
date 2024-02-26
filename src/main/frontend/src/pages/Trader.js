@@ -7,3 +7,5 @@ const Trader = () => {
         </>
     )
 }
+
+export default Trader;
