@@ -7,7 +7,7 @@ import {useEffect} from "react";
 const MonthCalendar = () => {
 
     const {year, month} = useParams();
-    const nagivate = useNavigate();
+    const navigate = useNavigate();
 
     const thisMonth = () => {
         if(month < 10){
@@ -25,7 +25,7 @@ const MonthCalendar = () => {
         const titleElement = document.querySelector(".fc-toolbar-title");
 
         const goBack = () => {
-            nagivate(-1);
+            navigate(-1);
         }
 
         if(titleElement){
@@ -37,7 +37,7 @@ const MonthCalendar = () => {
                 titleElement.removeEventListener("click", goBack);
             }
         }
-    }, [year, month, nagivate]);
+    }, [year, month, navigate]);
 
     return (
         <>
