@@ -5,6 +5,7 @@ import Calendar from "./pages/Calendar";
 import Journals from "./pages/Journals";
 import Settings from "./pages/Settings";
 import Admin from "./pages/Admin";
+import MonthCalendar from "./pages/MonthCalendar";
 import Login from "./pages/Login";
 import Signup from "./pages/Signup";
 import FindPass from "./pages/FindPass";
@@ -21,6 +22,7 @@ function App() {
             <Route path={"main"} element={<Main/>}/>
             <Route path={"calendar"}>
               <Route index element={<Calendar/>}/>
+              <Route path={":year/:month"} element={<MonthCalendar/>}/>
             </Route>
             <Route path={"journals"} element={<Journals/>}/>
             <Route path={"settings"} element={<Settings/>}/>
