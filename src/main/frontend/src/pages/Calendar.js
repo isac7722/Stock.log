@@ -1,10 +1,12 @@
 import FullCalendar from "@fullcalendar/react";
 import multiMonthPlugin from "@fullcalendar/multimonth";
 import interactionPlugin from "@fullcalendar/interaction"
-import {useNavigate} from "react-router-dom";
+import {useLocation, useNavigate} from "react-router-dom";
+import {useEffect, useState} from "react";
 const Calendar = () => {
 
     const navigate = useNavigate();
+
 
     const linkToMonthHandler = (info) => {
         const year = info.getFullYear();
