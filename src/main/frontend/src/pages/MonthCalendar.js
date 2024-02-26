@@ -11,13 +11,9 @@ const MonthCalendar = () => {
 
     const thisMonth = () => {
         if(month < 10){
-            const calendar = year + "-0" + month + "-" + "01";
-            console.log(calendar)
-            return calendar;
+            return year + "-0" + month + "-" + "01";
         }else{
-            const calendar = year + "-" + month + "-" + "01";
-            console.log(calendar)
-            return calendar;
+            return year + "-" + month + "-" + "01";
         }
     }
 
@@ -51,7 +47,6 @@ const MonthCalendar = () => {
                 end:"next"
             }}
             locale="kr"
-            titleFormat={{ month: 'long' }}
             />
         </>
     )
