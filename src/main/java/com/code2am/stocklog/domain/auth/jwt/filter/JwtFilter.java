@@ -1,6 +1,6 @@
 package com.code2am.stocklog.domain.auth.jwt.filter;
 
-import com.code2am.stocklog.domain.auth.enums.AuthConstants;
+import com.code2am.stocklog.domain.auth.common.enums.AuthConstants;
 import com.code2am.stocklog.domain.auth.jwt.util.TokenUtils;
 import jakarta.servlet.FilterChain;
 import jakarta.servlet.ServletException;
@@ -13,12 +13,17 @@ import org.springframework.util.StringUtils;
 import org.springframework.web.filter.OncePerRequestFilter;
 
 import java.io.IOException;
+import java.util.Arrays;
+import java.util.List;
 
 @RequiredArgsConstructor
 public class JwtFilter extends OncePerRequestFilter {
 
     public static final String AUTHORIZATION_HEADER = AuthConstants.AUTH_HEADER;
     public static final String BEARER_PREFIX = AuthConstants.TOKEN_TYPE;
+
+    // 허용하는 요청
+    private static final List<String> ALLOWED_PATHS = Arrays.asList("/mail/sendCode", "/mail/verifyCode");
 
     private final TokenUtils tokenUtils;
 
@@ -51,6 +56,9 @@ public class JwtFilter extends OncePerRequestFilter {
 
     @Override
     protected boolean shouldNotFilter(HttpServletRequest request) throws ServletException {
-        return super.shouldNotFilter(request);
+        String path = request.getServletPath();
+
+        // ALLOWED_PATHS에 속하는 경우 필터를 거치지 않고 통과
+        return ALLOWED_PATHS.stream().anyMatch(path::equals);
     }
 }
