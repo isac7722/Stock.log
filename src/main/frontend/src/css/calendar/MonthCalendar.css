@@ -1,0 +1,9 @@
+td.fc-day-sun {
+    color: white;
+    background-color: rgba(255, 0, 0, 0.4);
+}
+
+td.fc-day-sat {
+    color: white;
+    background-color: rgba(0, 0, 255, 0.4);
+}

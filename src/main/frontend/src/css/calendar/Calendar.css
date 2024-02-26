@@ -1,0 +1,11 @@
+.fc-multiMonthYear-view.fc-view.fc-multimonth.fc-multimonth-multicol {
+    overflow: visible;
+}
+
+button.fc-prev-button.fc-button.fc-button-primary, button.fc-next-button.fc-button.fc-button-primary{
+    background-color: green;
+}
+
+button.fc-prev-button.fc-button.fc-button-primary:hover, button.fc-next-button.fc-button.fc-button-primary:hover {
+    background-color: darkgreen;
+}

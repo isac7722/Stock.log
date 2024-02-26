@@ -4,6 +4,7 @@ import {useNavigate, useParams} from "react-router-dom";
 import {useEffect, useState} from "react";
 import {toast, ToastContainer} from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import "../css/calendar/MonthCalendar.css"
 
 const MonthCalendar = () => {
 
@@ -45,6 +46,7 @@ const MonthCalendar = () => {
         const hideNotification = () => {
             if(!isMouseOver){
                 toast.dismiss();
+                setIsMouseOver(false);
             }
         }
 
@@ -65,17 +67,19 @@ const MonthCalendar = () => {
 
     return (
         <>
-            <FullCalendar
-            plugins={[dayGridPlugin]}
-            initialView="dayGridMonth"
-            initialDate={thisMonth()}
-            headerToolbar={{
-                center:"title",
-                start:"prev",
-                end:"next"
-            }}
-            locale="kr"
-            />
+            <div>
+                <FullCalendar
+                    plugins={[dayGridPlugin]}
+                    initialView="dayGridMonth"
+                    initialDate={thisMonth()}
+                    headerToolbar={{
+                        center:"title",
+                        start:"prev",
+                        end:"next"
+                    }}
+                    locale="kr"
+                />
+            </div>
             <ToastContainer/>
         </>
     )
