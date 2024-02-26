@@ -1,4 +1,4 @@
-package com.code2am.stocklog.domain.auth.util;
+package com.code2am.stocklog.domain.auth.common.util;
 
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.security.core.Authentication;

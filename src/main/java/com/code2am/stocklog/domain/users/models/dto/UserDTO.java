@@ -1,10 +1,9 @@
 package com.code2am.stocklog.domain.users.models.dto;
 
-import com.code2am.stocklog.domain.auth.enums.UserRole;
+import com.code2am.stocklog.domain.auth.common.enums.UserRole;
 import com.code2am.stocklog.domain.users.models.entity.Users;
 import lombok.Data;
 import lombok.RequiredArgsConstructor;
-import org.apache.catalina.User;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.crypto.password.PasswordEncoder;
 
@@ -28,10 +27,10 @@ public class UserDTO {
 
     private LocalDateTime createDate;
 
-    UserRole userRole;
+    private UserRole userRole;
 
     //생성자
-    public UserDTO(Integer userId, String email, String password, String status, Integer capital, String social, LocalDateTime createDate) {
+    public UserDTO(Integer userId, String email, String password, String status, Integer capital, String social, LocalDateTime createDate, UserRole userRole) {
     }
 
 
@@ -43,7 +42,9 @@ public class UserDTO {
                 user.getStatus(),
                 user.getCapital(),
                 user.getSocial(),
-                user.getCreateDate());
+                user.getCreateDate(),
+                user.getUserRole());
+
     }
 
 
@@ -55,7 +56,7 @@ public class UserDTO {
                         .capital(capital)
                         .social(social)
                         .createDate(createDate)
-
+                        .userRole(userRole)
                         .build();
         return user;
     }
