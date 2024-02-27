@@ -61,5 +61,5 @@ yarn-debug.log*
 yarn-error.log*
 
 # yml
-application-db.yml
-application-key.yml
+*.yml
+.yml
