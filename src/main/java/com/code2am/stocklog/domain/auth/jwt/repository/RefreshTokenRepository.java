@@ -1,4 +1,4 @@
-package com.code2am.stocklog.domain.auth.jwt;
+package com.code2am.stocklog.domain.auth.jwt.repository;
 
 import com.code2am.stocklog.domain.auth.jwt.model.entity.RefreshToken;
 import org.springframework.data.jpa.repository.JpaRepository;

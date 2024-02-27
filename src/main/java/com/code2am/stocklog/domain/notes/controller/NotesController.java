@@ -35,7 +35,7 @@ public class NotesController {
             tags = {"POST"})
     @ApiResponses(value = {
             @ApiResponse(responseCode = "200", description = "매매노트를 성공적으로 등록함."),
-            @ApiResponse(responseCode = "404", description = "요청에 필요한 값이 정상적으로 입력되지 앟음."),
+            @ApiResponse(responseCode = "400", description = "요청에 필요한 값이 정상적으로 입력되지 앟음."),
             @ApiResponse(responseCode = "500", description = "요청받은 서버가 정상적으로 동작하지 않음.")
     })
     @Parameter(name = "notesDTO", description = "매매일지에 신규로 등록할 매매노트")
@@ -45,7 +45,7 @@ public class NotesController {
 
         // 요청값이 없는지 확인
         if(Objects.isNull(notesDTO)){
-            return ResponseEntity.status(404).body("입력값이 없습니다.");
+            return ResponseEntity.status(400).body("입력값이 없습니다.");
         }
 
         // 실제 입력받은 데이터를 입력 로직으로

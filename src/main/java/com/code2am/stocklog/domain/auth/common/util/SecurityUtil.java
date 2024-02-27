@@ -3,8 +3,10 @@ package com.code2am.stocklog.domain.auth.common.util;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.stereotype.Component;
 
 @Slf4j
+@Component
 public class SecurityUtil {
 
     private SecurityUtil() { }
@@ -19,5 +21,15 @@ public class SecurityUtil {
         }
 
         return Long.parseLong(authentication.getName());
+    }
+
+
+    public Integer getUserId(){
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+
+        // 사용자의 ID를 얻는 방법
+        String userIdAsString = authentication.getName();
+        Integer userId = Integer.parseInt(userIdAsString);
+        return userId;
     }
 }

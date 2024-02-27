@@ -1,0 +1,47 @@
+#navbar {
+    width: 15%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    position: fixed;
+    z-index: 100;
+    background-color: white;
+    top: 0;
+}
+
+#logoBox {
+    display: flex;
+    justify-content: center;
+}
+
+#logo {
+    width: 50%;
+}
+
+#navbarTitle {
+    font-size: 0.7em;
+    text-align: center;
+}
+
+.navbarList {
+    display: flex;
+    flex-direction: column;
+}
+
+.navbarMenu {
+    margin: 0.5em;
+    text-align: center;
+}
+
+.header {
+    position: relative;
+    width: 84%;
+    left: 16%;
+}
+
+#mainContents {
+    position: relative;
+    left: 15%;
+    width: 85%;
+}

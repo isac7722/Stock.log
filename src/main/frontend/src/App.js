@@ -5,20 +5,29 @@ import Calendar from "./pages/Calendar";
 import Journals from "./pages/Journals";
 import Settings from "./pages/Settings";
 import Admin from "./pages/Admin";
+import MonthCalendar from "./pages/MonthCalendar";
+import Login from "./pages/Login";
+import Signup from "./pages/Signup";
+import FindPass from "./pages/FindPass";
+import "normalize.css"
+import Trader from "./pages/Trader";
+import 'bootstrap/dist/css/bootstrap.min.css';
 
 function App() {
   return (
     <>
       <BrowserRouter>
         <Routes>
-          <Route path={"/login"}>
-
-          </Route>
+          <Route path={"/login"} element={<Login/>}></Route>
+          <Route path={"/signup"} element={<Signup/>}></Route>
+          <Route path={"/findpass"} element={<FindPass/>}></Route>
           <Route path={"/"} element={<Layout/>}>
-            <Route path={"main"} element={<Main/>}/>
+            <Route index element={<Main/>}/>
             <Route path={"calendar"}>
               <Route index element={<Calendar/>}/>
+              <Route path={":year/:month"} element={<MonthCalendar/>}/>
             </Route>
+            <Route path={"trader"} element={<Trader/>}/>
             <Route path={"journals"} element={<Journals/>}/>
             <Route path={"settings"} element={<Settings/>}/>
           </Route>

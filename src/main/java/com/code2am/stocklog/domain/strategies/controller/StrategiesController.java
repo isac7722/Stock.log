@@ -45,6 +45,7 @@ public class StrategiesController {
         }
 
         String result = strategiesService.createStrategy(strategy);
+
         if(result.isEmpty()){
             return ResponseEntity.badRequest().body("이미 같은 매매전략이 존재하고 있습니다.");
         }
@@ -100,8 +101,6 @@ public class StrategiesController {
     @DeleteMapping("/delete")
     public void deleteStrategyByStrategyIdAndUserId(@RequestBody StrategiesDTO strategy){ // 매개변수는 추후 수정
 
-        Integer userId = 1;
-
-        strategiesService.deleteStrategyByStrategyIdAndUserId(strategy, userId);
+        strategiesService.deleteStrategyByStrategyIdAndUserId(strategy);
     }
 }

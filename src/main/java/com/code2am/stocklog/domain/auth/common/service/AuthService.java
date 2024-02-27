@@ -1,6 +1,6 @@
 package com.code2am.stocklog.domain.auth.common.service;
 
-import com.code2am.stocklog.domain.auth.jwt.RefreshTokenRepository;
+import com.code2am.stocklog.domain.auth.jwt.repository.RefreshTokenRepository;
 import com.code2am.stocklog.domain.auth.jwt.model.dto.TokenDTO;
 import com.code2am.stocklog.domain.auth.jwt.model.entity.RefreshToken;
 import com.code2am.stocklog.domain.auth.jwt.util.TokenUtils;
