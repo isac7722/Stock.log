@@ -1,19 +1,22 @@
-import SettingButton from "../components/setting/SettingButton";
-import SettingInput from "../components/setting/SettingInput";
+import ChangePassBtn from "../components/setting/ChangePassBtn";
+import SettingDisabledInput from "../components/setting/SettingDisabledInput";
 
 const Settings = () => {
 
     return (
         <div className="settingDiv">
-            <SettingInput
-                placeholder={"email"}
+            <SettingDisabledInput
+                placeholder="email"
+                type='email'
            />
-            <SettingInput
-                placeholder={"비밀번호"}
+           <div className="passSettingDiv">
+            <SettingDisabledInput
+                placeholder="비밀번호"
+                type='password'
            />
-           <SettingButton
-                value={"비밀번호 변경"}
-           />
+           <ChangePassBtn/>
+           </div>
+
         </div>
     )
 }
