@@ -20,4 +20,14 @@ public class SecurityUtil {
 
         return Long.parseLong(authentication.getName());
     }
+
+
+    public Integer getUserId(){
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+
+        // 사용자의 ID를 얻는 방법
+        String userIdAsString = authentication.getName();
+        Integer userId = Integer.parseInt(userIdAsString);
+        return userId;
+    }
 }
