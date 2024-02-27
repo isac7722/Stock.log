@@ -34,7 +34,7 @@
     margin-top: 3%;
 }
 
-#changePasswordButton{
+#modalBtn{
     margin-top: 1%;
     margin-left: 1%;
     background-color: #B5D692;
@@ -58,4 +58,13 @@
 
 .passSettingDiv{
     display: flex;
+}
+
+.assetInput{
+    display: flex;
+}
+
+.settingUnit{
+    margin-left: 1%;
+    margin-top: 1%;
 }

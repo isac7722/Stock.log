@@ -1,7 +1,7 @@
 
 /*모달 안에 들어갈 input*/
 
-const ChangePassInput = ({ type, placeholder, value, onChange }) => {
+const ModalInput = ({ type, placeholder, value, onChange }) => {
     return(
         <div>
             <input className="changePasswordInput"
@@ -13,4 +13,4 @@ const ChangePassInput = ({ type, placeholder, value, onChange }) => {
     )
 }
 
-export default ChangePassInput;
+export default ModalInput;
