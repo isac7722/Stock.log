@@ -1,4 +1,6 @@
 import {useState} from "react";
+import Form from 'react-bootstrap/Form';
+import Button from "react-bootstrap/Button";
 
 
 const JournalSearcher = () => {
@@ -13,7 +15,13 @@ const JournalSearcher = () => {
 
     return (
         <>
-
+            <Form.Control
+                type={"text"}
+                id={"search"}
+                value={text}
+                onChange={searcherHandler}
+            />
+            <Button type={"submit"}>검색</Button>
         </>
     )
 }
