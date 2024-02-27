@@ -10,7 +10,7 @@ const NavBar = ({pageInfo}) => {
 
     return(
         <>
-            <nav className={"navbar"}>
+            <nav id={"navbar"}>
                 <div id={"logoBox"}>
                     <img id={"logo"} src={"/img/logo.png"} alt={"로고 이미지"}/>
                 </div>
