@@ -1,6 +1,7 @@
 package com.code2am.stocklog.domain.auth.oauth.util;
 
 import com.code2am.stocklog.domain.auth.oauth.model.dto.OAuthToken;
+import com.code2am.stocklog.domain.auth.oauth.model.profile.KakaoProfile;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
 import org.springframework.util.LinkedMultiValueMap;
@@ -41,6 +42,9 @@ public class KakaoAPI {
     @Value("${spring.security.oauth2.client.provider.kakao.user-name-attribute}")
     private String USER_NAME_ATTRIBUTE;
 
+    private WebClient webClient;
+
+    /* 액세스 토큰을 받아온다 */
 
     public OAuthToken getToken(String code) {
 
@@ -53,7 +57,7 @@ public class KakaoAPI {
         params.add("code", code);
         params.add("client_secret", CLIENT_SECRET);
 
-        WebClient webClient = WebClient.create(TOKEN_URI);
+        webClient = WebClient.create(TOKEN_URI);
 
         System.out.println(3);
 
@@ -71,6 +75,12 @@ public class KakaoAPI {
         System.out.println("토큰 발급 완료!");
         System.out.println(oauthTokenRes);
 
+        System.out.println("사용자의 정보를 가져온다");
+        KakaoProfile profile = getMemberInfo(oauthTokenRes.getAccessToken());
+        System.out.println("사용자의 정보 가져옴!!");
+        String email = profile.getKakao_account().getEmail();
+        System.out.println("email : "+ email);
+
         return oauthTokenRes;
     }
 
@@ -80,11 +90,21 @@ public class KakaoAPI {
 
 
 
-    /* 액세스 토큰을 받아온다 */
-
 
 
     /* 사용자 정보를 받아온다 */
+
+    public KakaoProfile getMemberInfo(String accessToken) {
+        KakaoProfile profile = webClient.post()
+                .uri(USER_INFO_URI)
+                .header("Content-type", "application/x-www-form-urlencoded;charset=utf-8")
+                .headers(h -> h.setBearerAuth(accessToken)) // Header에 accessToken을 담는다
+                .retrieve()
+                .bodyToMono(KakaoProfile.class)
+                .block();
+
+        return profile;
+    }
 
 
 
