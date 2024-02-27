@@ -69,9 +69,11 @@ public class JournalsController {
             @ApiResponse(responseCode = "500", description = "요청받은 서버가 정상적으로 동작하지 않음.")
     })
     @Parameter(name = "searchJournal", description = "조회할 매매일지")
-    @GetMapping("/search/{userId}")
-    public ResponseEntity <List<JournalDTO>> readJournalsByUserId(@PathVariable("userId") int userId) {
+    @GetMapping("/search")
+    public ResponseEntity <List<JournalDTO>> readJournalsByUserId() {
 
+        Integer userId = securityUtil.getUserId();
+        System.out.println(userId);
         List<JournalDTO> journals = journalsService.readJournalsByUserId(userId);
 
         System.out.println(journals);
