@@ -56,6 +56,11 @@ dependencies {
     implementation 'javax.mail:mail:1.4.7'
     // Spring Context Support
     implementation 'org.springframework:spring-context-support:5.3.9'
+
+
+
+    // 요청을 보내기 위한 WebFlux
+    implementation 'org.springframework.boot:spring-boot-starter-webflux'
 }
 
 tasks.named('test') {
