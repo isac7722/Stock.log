@@ -1,0 +1,29 @@
+
+.settingDiv{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 15px;
+    outline: none;
+    padding-left: 10px;
+    background-color: rgb(245, 245, 245);
+    box-shadow: 0px 0px 7px black;
+    height: 700px;
+    flex-direction: column;
+}
+
+.settingEmailInput{
+    width: 500px;
+    height: 30px;
+    font-size: 15px;
+    border: 0;
+    border-radius: 15px;
+    outline: none;
+    background-color: rgb(245, 245, 245);
+    box-shadow: 0px 0px 7px black;
+    margin-top: 3%;
+}
+
+.settingBtn{
+    background-color: #B5D692;
+}
