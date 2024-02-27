@@ -75,20 +75,8 @@ public class KakaoAPI {
         System.out.println("토큰 발급 완료!");
         System.out.println(oauthTokenRes);
 
-        System.out.println("사용자의 정보를 가져온다");
-        KakaoProfile profile = getMemberInfo(oauthTokenRes.getAccessToken());
-        System.out.println("사용자의 정보 가져옴!!");
-        String email = profile.getKakao_account().getEmail();
-        System.out.println("email : "+ email);
-
         return oauthTokenRes;
     }
-
-
-
-
-
-
 
 
 

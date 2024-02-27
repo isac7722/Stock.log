@@ -25,7 +25,7 @@ public class AuthService {
     private final RefreshTokenRepository refreshTokenRepository;
 
     @Transactional
-    public UserDTO signup(UserDTO userDTO) {
+    public UserDTO  signup(UserDTO userDTO) {
         if (usersRepository.existsByEmail(userDTO.getEmail())) {
             throw new RuntimeException("이미 가입되어 있는 유저입니다");
         }
