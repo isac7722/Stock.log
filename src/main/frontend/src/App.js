@@ -12,8 +12,25 @@ import FindPass from "./pages/FindPass";
 import "normalize.css"
 import Trader from "./pages/Trader";
 import 'bootstrap/dist/css/bootstrap.min.css';
+import {useEffect, useState} from "react";
+import {callJournalList} from "./apis/JournalsAPI";
+import {callNoteList} from "./apis/NotesAPI";
 
 function App() {
+
+  const [journalList, setJournalList] = useState([]);
+  const [tradeList, setTradeList] = useState([]);
+  const [noteList, setNoteList] = useState([]);
+
+
+  useEffect(() => {
+    setJournalList(prevJournalList => [...journalList, callJournalList()]);
+
+    setTradeList(prevTradeList  => [...tradeList, callTradeList()]);
+
+    setNoteList(prevNoteList  => [...noteList, callNoteList()])
+  }, []);
+
   return (
     <>
       <BrowserRouter>

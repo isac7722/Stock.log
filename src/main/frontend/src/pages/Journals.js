@@ -1,13 +1,9 @@
 import JournalSearcher from "../components/journals/JournalSearcher";
 import Table from "react-bootstrap/Table";
 import "../css/journals/journals.css"
-import {useState} from "react";
-import {callJournalList} from "../apis/JournalsAPI";
 import JournalList from "../components/journals/JournalList";
 
 const Journals = () => {
-
-    const [journalList, setJournalList] = useState({});
 
     // 전체 테이블
 
@@ -18,8 +14,6 @@ const Journals = () => {
             <th>{th}</th>
         )
     });
-
-    setJournalList(callJournalList());
 
     return (
         <>

@@ -18,8 +18,6 @@ export const callJournalList = async () => {
 // 백엔드 작업 필요!!
 export async function callJournalListBySearch({text}){
     await axios("/journals", {
-        params: {
-            text : text // 검색할 내용
-        }
+        text:text
     })
 }
