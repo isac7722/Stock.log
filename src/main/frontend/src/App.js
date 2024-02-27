@@ -11,6 +11,7 @@ import Signup from "./pages/Signup";
 import FindPass from "./pages/FindPass";
 import "normalize.css"
 import Trader from "./pages/Trader";
+import 'bootstrap/dist/css/bootstrap.min.css';
 
 function App() {
   return (
