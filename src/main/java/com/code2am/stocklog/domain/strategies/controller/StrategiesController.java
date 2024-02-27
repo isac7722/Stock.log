@@ -101,8 +101,6 @@ public class StrategiesController {
     @DeleteMapping("/delete")
     public void deleteStrategyByStrategyIdAndUserId(@RequestBody StrategiesDTO strategy){ // 매개변수는 추후 수정
 
-        Integer userId = 1; // 임시 데이터
-
-        strategiesService.deleteStrategyByStrategyIdAndUserId(strategy, userId);
+        strategiesService.deleteStrategyByStrategyIdAndUserId(strategy);
     }
 }

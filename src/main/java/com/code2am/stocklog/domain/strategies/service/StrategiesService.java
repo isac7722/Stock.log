@@ -9,6 +9,8 @@ import com.code2am.stocklog.domain.strategies.repository.StrategiesRepository;
 import com.code2am.stocklog.domain.strategies.repository.UsersAndStrategiesRepository;
 import com.code2am.stocklog.domain.users.models.entity.Users;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -121,7 +123,12 @@ public class StrategiesService {
     /**
      * 매매전략을 작성한 사용자의 id 값과 자체 id 값을 이용해 매매전략을 삭제하는 메소드
      * */
-    public void deleteStrategyByStrategyIdAndUserId(StrategiesDTO strategy, Integer userId) {
+    public void deleteStrategyByStrategyIdAndUserId(StrategiesDTO strategy) {
+
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+        // 사용자의 ID를 얻는 방법
+        String userIdAsString = authentication.getName();
+        Integer userId = Integer.parseInt(userIdAsString);
 
         Integer strategyId = strategy.getStrategyId();
 
