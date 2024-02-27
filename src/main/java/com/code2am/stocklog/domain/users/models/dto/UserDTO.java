@@ -4,11 +4,16 @@ import com.code2am.stocklog.domain.auth.common.enums.UserRole;
 import com.code2am.stocklog.domain.users.models.entity.Users;
 import lombok.Data;
 import lombok.RequiredArgsConstructor;
+import org.apache.catalina.User;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
+import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.crypto.password.PasswordEncoder;
 
+import javax.management.relation.Role;
 import java.time.LocalDateTime;
 import java.util.Collections;
+import java.util.List;
 
 @Data
 @RequiredArgsConstructor
@@ -35,6 +40,7 @@ public class UserDTO {
 
 
     public static UserDTO of(Users user){
+
         return new UserDTO(
                 user.getUserId(),
                 user.getEmail(),
@@ -62,11 +68,18 @@ public class UserDTO {
     }
 
     public UsernamePasswordAuthenticationToken toAuthentication(){
-        return new UsernamePasswordAuthenticationToken(
+        List<GrantedAuthority> authority = Collections.singletonList(new SimpleGrantedAuthority(UserRole.ROLE_USER.toString()));
+
+        UsernamePasswordAuthenticationToken usernamePasswordAuthenticationToken = new UsernamePasswordAuthenticationToken(
                 this.email,
                 this.password,
-                Collections.emptyList()
-        );
+                authority);
+
+
+        System.out.println(usernamePasswordAuthenticationToken);
+
+
+        return usernamePasswordAuthenticationToken;
     }
 }
 

@@ -1,5 +1,6 @@
 package com.code2am.stocklog.domain.journals.controller;
 
+import com.code2am.stocklog.domain.auth.common.util.SecurityUtil;
 import com.code2am.stocklog.domain.journals.model.dto.JournalDTO;
 import com.code2am.stocklog.domain.journals.model.dto.TradeDTO;
 import com.code2am.stocklog.domain.journals.model.entitiy.Journal;
@@ -28,6 +29,9 @@ public class JournalsController {
     @Autowired
     JournalsService journalsService;
 
+    @Autowired
+    SecurityUtil securityUtil;
+
 
     /* 매매일지 등록 */
     @Operation(
@@ -43,31 +47,6 @@ public class JournalsController {
     @Parameter(name = "createJournal", description = "신규로 등록할 매매일지")
     @PostMapping
     public ResponseEntity<JournalDTO> createJournal(@RequestBody JournalDTO journalDTO){
-
-        /*
-        프런트에서 사용자에게 받는 정보
-        Integer stockCode
-        Integer strategyId
-        String status;
-        List<TradeDTO> trades
-        List<NoteDTO> notes
-        */
-
-
-        /* 자바에서 처리할 데이터*/
-
-
-        /* newJournal에 userId 입력 */
-        // 현재 사용중인 사용자를 지정 (currentUser)
-        Object currentUser = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
-
-        // 로그인 되어있는 SecurityContextHolder 안에 있는 AuthDetails 정보를 가져옴
-        // AuthDetails 안에 있는 userNo 정보를 가져옴
-
-        /*===============================================*/
-        /* 지금 AuthDetails가 아직 작업이 안되어 있는 관계로 작업이 끝나면 추가 예정 */
-
-
 
         // 매매일지의 정보를 업데이트
         JournalDTO newJournal = journalInfoUpdate(journalDTO);
@@ -163,6 +142,9 @@ public class JournalsController {
 
     // 입력받은 값을 통해 journalDTO의 정보를 업데이트 하는 메소드
     public JournalDTO journalInfoUpdate(JournalDTO journalDTO){
+        /* 유저 아이디를 입력 */
+        journalDTO.setUserId(securityUtil.getUserId());
+
         /* 최종 거래일 입력 */
         journalDTO.setLastTradedDate(getLastTradedDate(journalDTO));
 
