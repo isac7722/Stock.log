@@ -1,9 +1,9 @@
 import '../../css/setting/Setting.css';
 
-const SettingInput = ( { placeholder } ) => {
+const SettingInput = ( { placeholder, type } ) => {
     return(
-        <div class="form-floating mb-3">
-           <input type="email" className='settingEmailInput' placeholder={placeholder} disabled/>
+        <div>
+           <input type={type} className='settingEmailInput' placeholder={placeholder}/>
         </div>
     )
 }
