@@ -2,7 +2,6 @@ package com.code2am.stocklog.domain.auth.oauth.service;
 
 import com.code2am.stocklog.domain.auth.common.enums.UserRole;
 import com.code2am.stocklog.domain.auth.common.service.AuthService;
-import com.code2am.stocklog.domain.auth.common.util.PasswordGenerator;
 import com.code2am.stocklog.domain.auth.jwt.model.dto.TokenDTO;
 
 import com.code2am.stocklog.domain.auth.oauth.model.dto.OAuthToken;
