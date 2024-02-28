@@ -1,11 +1,11 @@
 import Table from "react-bootstrap/Table";
 
 
-const TradeList = ({tradeList}) => {
+const TradeList = ({trades}) => {
 
     // Accordion.Body 영역
 
-    const tradesMaping = tradeList.map(trade => (
+    const tradesMaping = trades.map(trade => (
                 <tr>
                     <td>
                         {trade.tradeDate}

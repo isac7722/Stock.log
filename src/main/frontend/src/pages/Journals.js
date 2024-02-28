@@ -16,7 +16,7 @@ const Journals = () => {
     return (
         <>
             <div className={"journalSearcher"}>
-                {/*<JournalSearcher journalList={journalList} setJournalList={setJournalList}/>*/}
+                <JournalSearcher/>
             </div>
             <div>
                 <Table bordered hover>
