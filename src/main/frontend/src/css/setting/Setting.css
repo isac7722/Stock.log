@@ -1,8 +1,6 @@
 
 .settingDiv{
     display: flex;
-    justify-content: center;
-    align-items: center;
     border-radius: 15px;
     outline: none;
     padding-left: 10px;
@@ -24,6 +22,49 @@
     margin-top: 3%;
 }
 
-.settingBtn{
+.settingPassInput{
+    width: 500px;
+    height: 30px;
+    font-size: 15px;
+    border: 0;
+    border-radius: 15px;
+    outline: none;
+    background-color: rgb(245, 245, 245);
+    box-shadow: 0px 0px 7px black;
+    margin-top: 3%;
+}
+
+#modalBtn{
+    margin-top: 1%;
+    margin-left: 1%;
     background-color: #B5D692;
+    border: 0;
+    height: 30px;
+    width: 120px;
+    font-size: 13px;
+}
+
+.changePasswordInput{
+    width: 470px;
+    height: 30px;
+    font-size: 15px;
+    border: 0;
+    border-radius: 15px;
+    outline: none;
+    background-color: rgb(245, 245, 245);
+    box-shadow: 0px 0px 7px black;
+    margin-top: 3%;
+}
+
+.passSettingDiv{
+    display: flex;
+}
+
+.assetInput{
+    display: flex;
+}
+
+.settingUnit{
+    margin-left: 1%;
+    margin-top: 1%;
 }

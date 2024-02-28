@@ -12,8 +12,25 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import Login from "./pages/auth/Login";
 import Signup from "./pages/auth/Signup";
 import FindPass from "./pages/auth/FindPass";
+import {useEffect, useState} from "react";
+import {callJournalList} from "./apis/JournalsAPI";
+import {callNoteList} from "./apis/NotesAPI";
 
 function App() {
+
+  const [journalList, setJournalList] = useState([]);
+  const [tradeList, setTradeList] = useState([]);
+  const [noteList, setNoteList] = useState([]);
+
+
+  useEffect(() => {
+    setJournalList(prevJournalList => [...journalList, callJournalList()]);
+
+    setTradeList(prevTradeList  => [...tradeList, callTradeList()]);
+
+    setNoteList(prevNoteList  => [...noteList, callNoteList(journalList[0].journalId)])
+  }, []);
+
   return (
     <>
       <BrowserRouter>
@@ -34,7 +51,7 @@ function App() {
           <Route path={"/admin"} element={<Admin/>}>
 
           </Route>
-        </Routes>
+        </Routes>zz
       </BrowserRouter>
     </>
   );
