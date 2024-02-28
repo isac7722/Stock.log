@@ -23,13 +23,13 @@ function App() {
   const [noteList, setNoteList] = useState([]);
 
 
-  useEffect(() => {
-    setJournalList(prevJournalList => [...journalList, callJournalList()]);
+  // useEffect(() => {
+  //   setJournalList(prevJournalList => [...journalList, callJournalList()]);
 
-    setTradeList(prevTradeList  => [...tradeList, callTradeList()]);
+  //   setTradeList(prevTradeList  => [...tradeList, callTradeList()]);
 
-    setNoteList(prevNoteList  => [...noteList, callNoteList(journalList[0].journalId)])
-  }, []);
+  //   setNoteList(prevNoteList  => [...noteList, callNoteList(journalList[0].journalId)])
+  // }, []);
 
   return (
     <>

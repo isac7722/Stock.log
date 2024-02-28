@@ -30,14 +30,17 @@ public class AuthDetailsService implements UserDetailsService {
 
         Users user = usersRepository.findByEmail(username).get();
 
+        if (username.equals(user.getEmail())){
+            System.out.println("DB까지 통과");
+        }
+
         UserDetails userDetails = createUserDetails(user);
 
         System.out.println(userDetails);
 
-        if (username.equals(userDetails.getPassword())){
+        if (username.equals(userDetails.getUsername())){
             System.out.println(true);
         }
-        System.out.println(false);
 
 
         return userDetails;
@@ -50,7 +53,7 @@ public class AuthDetailsService implements UserDetailsService {
         System.out.println("2-2");
 
         User user = new User(
-                String.valueOf(users.getUserId()),
+                String.valueOf(users.getEmail()),
                 users.getPassword(),
                 Collections.singleton(grantedAuthority)
         );

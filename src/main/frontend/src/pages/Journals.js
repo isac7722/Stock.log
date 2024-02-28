@@ -28,7 +28,7 @@ const Journals = () => {
                     </tr>
                     </thead>
                     <tbody>
-                        <JournalList journalList={journalList}/>
+                        {/* <JournalList journalList={journalList}/> */}
                     </tbody>
                 </Table>
             </div>
