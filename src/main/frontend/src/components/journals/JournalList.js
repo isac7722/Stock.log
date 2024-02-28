@@ -1,10 +1,12 @@
 import Accordion from "react-bootstrap/Accordion";
 import TradeList from "./TradeList";
 import NoteList from "./NoteList";
+import useJournalStore from "../../dataStore/JournalStore";
 
 
-const JournalList = ({journalList}) => {
+const JournalList = () => {
 
+    const {journalList} = useJournalStore();
     // ["종목코드", "종목명", "최종거래일", "매수가격", "매수물량", "매도가격", "매도물량", "매매전략", "P&L", "수정"]
     // 아코디언 헤드 영역
 

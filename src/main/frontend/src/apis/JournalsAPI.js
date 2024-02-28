@@ -1,4 +1,5 @@
 
+
 // 매매일지 목록 조회
 export const callJournalList = async () => {
     return await request.get("/journals/search");
