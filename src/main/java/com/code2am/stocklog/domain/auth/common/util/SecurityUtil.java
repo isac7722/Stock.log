@@ -1,6 +1,8 @@
 package com.code2am.stocklog.domain.auth.common.util;
 
+import com.code2am.stocklog.domain.users.repository.UsersRepository;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Component;
@@ -9,7 +11,10 @@ import org.springframework.stereotype.Component;
 @Component
 public class SecurityUtil {
 
-    private SecurityUtil() { }
+    @Autowired
+    UsersRepository usersRepository;
+
+   private SecurityUtil() { }
 
     // SecurityContext 에 유저 정보가 저장되는 시점
     // Request 가 들어올 때 JwtFilter 의 doFilter 에서 저장
@@ -25,11 +30,18 @@ public class SecurityUtil {
 
 
     public Integer getUserId(){
+
+        // 사용자의 ID를 얻는 방법
+        Integer userId = usersRepository.findByEmail(getUserEmail()).get().getUserId();
+
+        return userId;
+    }
+
+    public String getUserEmail(){
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
 
         // 사용자의 ID를 얻는 방법
-        String userIdAsString = authentication.getName();
-        Integer userId = Integer.parseInt(userIdAsString);
-        return userId;
+        String email = authentication.getName();
+        return email;
     }
 }
