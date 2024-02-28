@@ -5,9 +5,9 @@ const Main = () => {
     // test
     const {journalList, setJournalList} = useJournalStore();
 
-    const test = () => {
-        setJournalList();
+    const test = async () => {
         console.log(journalList);
+        await setJournalList();
     }
 
     return (
