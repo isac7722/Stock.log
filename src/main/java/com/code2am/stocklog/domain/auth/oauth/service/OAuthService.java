@@ -4,21 +4,15 @@ import com.code2am.stocklog.domain.auth.common.enums.UserRole;
 import com.code2am.stocklog.domain.auth.common.service.AuthService;
 import com.code2am.stocklog.domain.auth.common.util.PasswordGenerator;
 import com.code2am.stocklog.domain.auth.jwt.model.dto.TokenDTO;
-import com.code2am.stocklog.domain.auth.jwt.model.entity.RefreshToken;
-import com.code2am.stocklog.domain.auth.jwt.repository.RefreshTokenRepository;
-import com.code2am.stocklog.domain.auth.jwt.util.TokenUtils;
+
 import com.code2am.stocklog.domain.auth.oauth.model.dto.OAuthToken;
 import com.code2am.stocklog.domain.auth.oauth.model.profile.KakaoProfile;
 import com.code2am.stocklog.domain.auth.oauth.util.KakaoAPI;
 import com.code2am.stocklog.domain.users.models.dto.UserDTO;
 import com.code2am.stocklog.domain.users.models.entity.Users;
 import com.code2am.stocklog.domain.users.repository.UsersRepository;
-import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
-import org.apache.catalina.User;
-import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
-import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
-import org.springframework.security.core.Authentication;
+
 import org.springframework.stereotype.Service;
 
 @Service
