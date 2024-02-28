@@ -59,7 +59,6 @@
 
 .navDiv{
     display: flex;
-    margin-top: 7%;
     height: 50px;
 }
 
@@ -67,9 +66,17 @@
     background-color: #F3F4F8;
 }
 
+.navbarMenu{
+    margin-top: 10%;
+}
+
 .navLogo{
     width: 20px;
     height: 20px;
-    margin-top: 7%;
+    margin-right: 7px;
+}
+
+.navDetailDiv{
+    margin-top: 10%;
 }
 
