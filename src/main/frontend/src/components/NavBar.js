@@ -7,10 +7,10 @@ const NavBar = ({pageInfo}) => {
 
     const pageInfoList = () => pageInfo.map(page => {
         return(
-            <div className="navDiv">
+        <div className="navDiv">
             <img src={page.imgUrl} className="navLogo" />
             <Link className={"navbarMenu"} to={page.url}>{page.name}</Link>
-            </div>
+        </div>
         )
     })
 
