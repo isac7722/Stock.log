@@ -1,15 +1,18 @@
 package com.code2am.stocklog.domain.journals.controller;
 
 import com.code2am.stocklog.domain.auth.common.util.SecurityUtil;
+import com.code2am.stocklog.domain.auth.jwt.util.TokenUtils;
 import com.code2am.stocklog.domain.journals.model.dto.JournalDTO;
 import com.code2am.stocklog.domain.journals.model.dto.TradeDTO;
 import com.code2am.stocklog.domain.journals.model.entitiy.Journal;
 import com.code2am.stocklog.domain.journals.service.JournalsService;
+import com.code2am.stocklog.domain.users.repository.UsersRepository;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.Parameter;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.responses.ApiResponses;
 import io.swagger.v3.oas.annotations.tags.Tag;
+import jakarta.servlet.http.HttpServletRequest;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.context.SecurityContextHolder;
@@ -31,6 +34,12 @@ public class JournalsController {
 
     @Autowired
     SecurityUtil securityUtil;
+
+    @Autowired
+    TokenUtils tokenUtils;
+
+    @Autowired
+    UsersRepository usersRepository;
 
 
     /* 매매일지 등록 */
@@ -70,10 +79,15 @@ public class JournalsController {
     })
     @Parameter(name = "searchJournal", description = "조회할 매매일지")
     @GetMapping("/search")
-    public ResponseEntity <List<JournalDTO>> readJournalsByUserId() {
+    public ResponseEntity <List<JournalDTO>> readJournalsByUserId(HttpServletRequest request) {
 
-        Integer userId = securityUtil.getUserId();
-        System.out.println(userId);
+        String email = tokenUtils.getEmailFromJwtToken(request);
+        System.out.println("사용자의 이메일: "+email);
+
+        // 임시방편 코드
+        Integer userId = usersRepository.findByEmail(email).get().getUserId();
+
+
         List<JournalDTO> journals = journalsService.readJournalsByUserId(userId);
 
         System.out.println(journals);

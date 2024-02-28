@@ -1,3 +1,4 @@
+import { request } from "./Api";
 
 
 // 매매일지 목록 조회
