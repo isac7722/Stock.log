@@ -86,11 +86,9 @@ public class StrategiesController {
             tags = {"GET"}
     )
     @GetMapping("/user")
-    public List<StrategiesDTO> readStrategiesByUserId(@RequestBody UsersIdDTO user){ // 매개변수는 추후에 수정
+    public List<StrategiesDTO> readStrategiesByUserId(){
 
-        Integer userId = user.getUserId();
-
-        return strategiesService.readStrategiesByUserId(userId);
+        return strategiesService.readStrategiesByUserId();
     }
 
     @Operation(

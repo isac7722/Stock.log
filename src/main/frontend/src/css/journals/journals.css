@@ -1,0 +1,9 @@
+.journalSearcher {
+    display: flex;
+    margin-bottom: 5px;
+}
+
+#search {
+    width: 50%;
+    margin-right: 4px;
+}

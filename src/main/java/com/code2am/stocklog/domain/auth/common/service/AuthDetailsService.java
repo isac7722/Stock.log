@@ -28,31 +28,32 @@ public class AuthDetailsService implements UserDetailsService {
         System.out.println(username);
 
 
-//        return memberRepository.findByEmail(username)
-//                .map(this::createUserDetails)
-//                .orElseThrow(() -> new UsernameNotFoundException(username + " -> 데이터베이스에서 찾을 수 없습니다."));
+        Users user = usersRepository.findByEmail(username).get();
+
+        if (username.equals(user.getEmail())){
+            System.out.println("DB까지 통과");
+        }
+
+        UserDetails userDetails = createUserDetails(user);
+
+        System.out.println(userDetails);
+
+        if (username.equals(userDetails.getUsername())){
+            System.out.println(true);
+        }
 
 
-        return usersRepository.findByEmail(username)
-                .map(this::createUserDetails)
-                .orElseThrow(() -> new UsernameNotFoundException(username + " -> 데이터베이스에서 찾을 수 없습니다."));
+        return userDetails;
     }
 
     // DB 에 User 값이 존재한다면 UserDetails 객체로 만들어서 리턴
     private UserDetails createUserDetails(Users users) {
         GrantedAuthority grantedAuthority = new SimpleGrantedAuthority(users.getUserRole().toString());
 
-
-//        return new User (
-//                String.valueOf(member.getId()),
-//                member.getPassword(),
-//                Collections.singleton(grantedAuthority)
-//        );
-
         System.out.println("2-2");
 
         User user = new User(
-                String.valueOf(users.getUserId()),
+                String.valueOf(users.getEmail()),
                 users.getPassword(),
                 Collections.singleton(grantedAuthority)
         );

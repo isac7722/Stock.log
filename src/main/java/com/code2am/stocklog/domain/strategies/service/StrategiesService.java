@@ -1,5 +1,6 @@
 package com.code2am.stocklog.domain.strategies.service;
 
+import com.code2am.stocklog.domain.auth.common.util.SecurityUtil;
 import com.code2am.stocklog.domain.strategies.dao.StrategiesDAO;
 import com.code2am.stocklog.domain.strategies.models.dto.StrategiesDTO;
 import com.code2am.stocklog.domain.strategies.models.entity.Strategies;
@@ -28,6 +29,9 @@ public class StrategiesService {
     @Autowired
     private UsersAndStrategiesRepository usersAndStrategiesRepository;
 
+    @Autowired
+    private SecurityUtil securityUtil;
+
     /**
      * 매매전략을 생성하는 메소드
      * */
@@ -37,12 +41,14 @@ public class StrategiesService {
         UsersAndStrategies usersAndStrategies = new UsersAndStrategies(); // 복합키, 중간 테이블을 이용해 직접적인 관계를 만들지 않도록 한다.
         Users users = new Users();
 
+        Integer userId = securityUtil.getUserId();
+
         // 동일한 이름의 매매전략이 있을 경우 행하지 않는다.
         StrategiesDTO find = readStrategyByStrategyName(strategy.getStrategyName());
         if(!Objects.isNull(find)){
 
             // 해당 유저의 유저 정보를 엔티티에 담아야 한다.
-            users.setUserId(2); // 임시, 변경 필수
+            users.setUserId(userId);
 
             newStrategy.setStrategyId(find.getStrategyId());
 
@@ -56,8 +62,8 @@ public class StrategiesService {
             return "등록되었습니다.";
         }
 
-        // 유저 정보 임시, 변경 필수
-        users.setUserId(1);
+        // 유저 정보
+        users.setUserId(userId);
 
         newStrategy.setStrategyName(strategy.getStrategyName());
         newStrategy.setStrategyStatus("Y");
@@ -116,7 +122,10 @@ public class StrategiesService {
     /**
      * 매매전략을 사용자의 id 값을 이용해 리스트로 반환하도록 조회하는 메소드
      * */
-    public List<StrategiesDTO> readStrategiesByUserId(Integer userId) {
+    public List<StrategiesDTO> readStrategiesByUserId() {
+
+        Integer userId = securityUtil.getUserId();
+
         return strategiesDAO.readStrategiesByUserId(userId);
     }
 
@@ -125,10 +134,7 @@ public class StrategiesService {
      * */
     public void deleteStrategyByStrategyIdAndUserId(StrategiesDTO strategy) {
 
-        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
-        // 사용자의 ID를 얻는 방법
-        String userIdAsString = authentication.getName();
-        Integer userId = Integer.parseInt(userIdAsString);
+        Integer userId = securityUtil.getUserId();
 
         Integer strategyId = strategy.getStrategyId();
 

@@ -25,7 +25,7 @@ public class AuthService {
     private final RefreshTokenRepository refreshTokenRepository;
 
     @Transactional
-    public UserDTO signup(UserDTO userDTO) {
+    public UserDTO  signup(UserDTO userDTO) {
         if (usersRepository.existsByEmail(userDTO.getEmail())) {
             throw new RuntimeException("이미 가입되어 있는 유저입니다");
         }
@@ -43,7 +43,7 @@ public class AuthService {
 
         System.out.println(2);
         // 2. 실제로 검증 (사용자 비밀번호 체크) 이 이루어지는 부분
-        //    authenticate 메서드가 실행이 될 때 CustomUserDetailsService 에서 만들었던 loadUserByUsername 메서드가 실행됨
+        //    authenticate 메서드가 실행이 될 때 AuthDetailsService 에서 만들었던 loadUserByUsername 메서드가 실행됨
         Authentication authentication = authenticationManagerBuilder.getObject().authenticate(authenticationToken);
 
         System.out.println(3);
