@@ -2,7 +2,6 @@ package com.code2am.stocklog.domain.auth.oauth.service;
 
 import com.code2am.stocklog.domain.auth.common.enums.UserRole;
 import com.code2am.stocklog.domain.auth.common.service.AuthService;
-import com.code2am.stocklog.domain.auth.common.util.PasswordGenerator;
 import com.code2am.stocklog.domain.auth.jwt.model.dto.TokenDTO;
 
 import com.code2am.stocklog.domain.auth.oauth.model.dto.OAuthToken;
@@ -20,7 +19,6 @@ import org.springframework.stereotype.Service;
 public class OAuthService {
 
     private final KakaoAPI kakaoAPI;
-    private final PasswordGenerator passwordGenerator;
     private final UsersRepository usersRepository;
     private final AuthService authService;
 
@@ -34,13 +32,15 @@ public class OAuthService {
 
         String email = profile.getKakao_account().getEmail();
 
+        System.out.println("사용자의 이메일: "+email);
+
         // DB 조회 결과 없다면
         if (!(usersRepository.existsByEmail(email))){
             System.out.println("이메일 조회 결과 없음, 등록 시작");
 
             UserDTO userDTO = new UserDTO();
             userDTO.setEmail(email);
-            userDTO.setPassword(passwordGenerator.generatePassword());
+            userDTO.setPassword("123");
             userDTO.setUserRole(UserRole.ROLE_USER);
             userDTO.setSocial("KAKAO");
 
@@ -59,9 +59,15 @@ public class OAuthService {
             return tokenDTO;
         }
         else {
-            System.out.println("조회 결과 없음");
+            System.out.println("조회 결과 있음");
             Users kakaoUser = usersRepository.findByEmail(email).get();
-            UserDTO userDTO = UserDTO.of(kakaoUser);
+            System.out.println(kakaoUser);
+
+            UserDTO userDTO = new UserDTO();
+            userDTO.setEmail(kakaoUser.getEmail());
+            userDTO.setPassword("123");
+
+//            UserDTO userDTO = UserDTO.of(kakaoUser);
 
             TokenDTO tokenDTO = authService.login(userDTO);
             return tokenDTO;
