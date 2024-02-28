@@ -28,7 +28,7 @@ function App() {
 
     setTradeList(prevTradeList  => [...tradeList, callTradeList()]);
 
-    setNoteList(prevNoteList  => [...noteList, callNoteList()])
+    setNoteList(prevNoteList  => [...noteList, callNoteList(journalList[0].journalId)])
   }, []);
 
   return (
@@ -51,7 +51,7 @@ function App() {
           <Route path={"/admin"} element={<Admin/>}>
 
           </Route>
-        </Routes>
+        </Routes>zz
       </BrowserRouter>
     </>
   );
