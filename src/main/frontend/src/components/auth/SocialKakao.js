@@ -69,7 +69,7 @@ export const SocialKakao = () => {
       const { data } = response;
       const { accessToken, accessTokenExpiresIn } = data;
 
-      setAccessToken(accessToken);
+      // setAccessToken(accessToken);
 
       // 갱신된 액세스 토큰 저장
       localStorage.setItem("accessToken", accessToken);
