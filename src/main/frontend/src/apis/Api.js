@@ -1,12 +1,25 @@
+import axios from "axios";
 
+const DOMAIN = "http://localhost:8080";
 
-// const DOMAIN = "http://localhost:4000";
+const getAccessToken = () => {
+  // localStorage에서 accessToken 가져오기
+  const accessToken = localStorage.getItem("accessToken");
 
-export const request = async (method, url, data, domain) =>{
-    return await axios({
-        method,
-        url:`${domain}${url}`,
-        data
-    }).then(res => res.data)
-    .catch(error => console.log(error));
+  return accessToken ? `BEARER ${accessToken}` : "";
+};
+
+export const request = async (method, url, data) => {
+  const headers = {
+    Authorization: getAccessToken(),
+  };
+
+  return await axios({
+    method,
+    url: `${DOMAIN}${url}`,
+    data,
+    headers,
+  })
+    .then((res) => res.data)
+    .catch((error) => console.log(error));
 };

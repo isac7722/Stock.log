@@ -1,6 +1,7 @@
 import axios from "axios";
 import { useEffect, useState } from "react";
 import { Button } from "react-bootstrap";
+import { useNavigate } from "react-router-dom";
 
 
 const REST_API_KEY = process.env.REACT_APP_REST_API_KEY;
@@ -12,27 +13,51 @@ const KAKAO_AUTH_URI = `https://kauth.kakao.com/oauth/authorize?client_id=${REST
 export const SocialKakao = () => {
 
   const [isLoggedIn, setIsLoggedIn] = useState(false);
+  const [accessToken, setAccessToken] = useState("");
+  const [refreshToken, setRefreshToken] = useState("");
+
+  const navigate = useNavigate();
+
 
   const handleLogin = () => {
-    console.log("카카오 로그인 버튼 클릭");
     window.location.href = KAKAO_AUTH_URI;
   };
 
+  // 카카오 로그인 handler
+  const handleKakaoCallback = async () => {
+    const code = new URLSearchParams(window.location.search).get("code");
+    if (!code) return;
 
+    try {
+      const response = await axios.post(
+        "http://localhost:8080/oauth/kakao",
+        { code },
+        { withCredentials: true }
+      );
 
+      const { data } = response;
+      const { accessToken, refreshToken, accessTokenExpiresIn } = data;
 
+      setAccessToken(accessToken);
+      setRefreshToken(refreshToken);
 
+      // localStorage에 저장
+      localStorage.setItem("accessToken", accessToken);
+      localStorage.setItem("refreshToken", refreshToken);
+      localStorage.setItem("expiresAt", Date.now() + accessTokenExpiresIn);
 
-  const isAccessTokenValid = (accessToken) => {
-    const now = Date.now();
-    const expiresAt = localStorage.getItem("expiresAt");
+      // localStorage 에 로그인 상태를 추가
+      setIsLoggedIn(true)
+      localStorage.setItem("isLogin", true);
 
-    if (!expiresAt) {
-      return false;
+      // main 페이지로 redirect
+      navigate("/");
+
+    } catch (error) {
+      console.error("카카오 로그인 실패:", error);
     }
-
-    return now < expiresAt;
   };
+
 
 
   // accessToken 만료를 체크하는 메소드
@@ -69,60 +94,12 @@ export const SocialKakao = () => {
       const { data } = response;
       const { accessToken, accessTokenExpiresIn } = data;
 
-      // setAccessToken(accessToken);
-
-      // 갱신된 액세스 토큰 저장
       localStorage.setItem("accessToken", accessToken);
-      localStorage.setItem("expiresAt", Date.now() + accessTokenExpiresIn * 1000);
+      localStorage.setItem("expiresAt", Date.now() + accessTokenExpiresIn);
 
       console.log("액세스 토큰 갱신 성공");
     } catch (error) {
       console.error("액세스 토큰 갱신 실패:", error);
-    }
-  };
-
-
-
-
-
-
-
-
-
-  const handleKakaoCallback = async () => {
-
-    console.log("handleKakaoCallback 함수 호출");
-
-    const code = new URLSearchParams(window.location.search).get("code");
-    if (!code) {
-      console.log("code 없음");
-      return;
-    }
-
-    // Axios를 사용하여 백엔드 서버로 코드 전송
-    try {
-      console.log("카카오 로그인 코드 전송 시작");
-      const response = await axios.post("http://localhost:8080/oauth/kakao", { code }, { withCredentials: true }
-      );
-
-      const { data } = response;
-      const { accessToken, refreshToken, accessTokenExpiresIn } = data;
-
-      // 로그인 성공 처리
-      console.log("카카오 로그인 성공:", data);
-      console.log("accessToken:", accessToken);
-      console.log("refreshToken:", refreshToken);
-      console.log("accessTokenExpiresIn:", accessTokenExpiresIn);
-
-       // localStorage에 저장
-       localStorage.setItem("accessToken", accessToken);
-       localStorage.setItem("refreshToken", refreshToken);
-       localStorage.setItem("accessTokenExpiresIn", accessTokenExpiresIn);
-
-      setIsLoggedIn(true);
-
-    } catch (error) {
-      console.error("카카오 로그인 실패:", error);
     }
   };
 
@@ -131,32 +108,12 @@ export const SocialKakao = () => {
 
     handleKakaoCallback();
 
-    // 로그인 정보 확인
-    const accessToken = localStorage.getItem("accessToken");
-    if (accessToken) {
-      // accessToken 유효성 검사 로직 추가
-      // ...
+    // 10분 마다 엑세스 토큰 유효성 체크
+    const interval = setInterval(checkAccessTokenExpiration, 1000 * 60 * 10);
 
-      // 유효하면 로그인 상태 유지
-      setIsLoggedIn(true);
-    }
   }, []);
 
-  // return (
-  //   <>
-  //     {isLoggedIn ? (
-  //       // 로그인 후 보여줄 내용
-  //       <div>
-  //         <p>로그인 성공!</p>
-  //         <p>accessToken: {localStorage.getItem("accessToken")}</p>
-  //         <p>refreshToken: {localStorage.getItem("refreshToken")}</p>
-  //       </div>
-  //     ) : (
-  //       // 로그인 전 보여줄 내용
-  //       <Button onClick={handleLogin}>카카오 로그인</Button>
-  //     )}
-  //   </>
-  // );
+
 
   return (
     <>

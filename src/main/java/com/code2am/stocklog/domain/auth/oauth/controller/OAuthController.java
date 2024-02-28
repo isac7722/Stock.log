@@ -43,24 +43,4 @@ public class OAuthController {
                 .header(HttpHeaders.AUTHORIZATION, AuthConstants.TOKEN_TYPE+ tokenDTO.getAccessToken())
                 .body(tokenDTO);
     }
-
-    // 카카오 인가 코드를 받는다
-//    @GetMapping("/kakao")
-//    public ResponseEntity<?> getKakaoLogin(@RequestParam String code){
-//        System.out.println(code);
-//
-//        System.out.println(1);
-//
-//        OAuthToken oAuthToken = kakaoAPI.getToken(code);
-//
-//        System.out.println("발급받은 카카오 토큰 : "+oAuthToken);
-//
-//        TokenDTO tokenDTO = oAuthService.kakaoLogin(oAuthToken);
-//
-//        System.out.println("반환할 token : "+tokenDTO);
-//
-//        return ResponseEntity.ok()
-//                .header(HttpHeaders.AUTHORIZATION, AuthConstants.TOKEN_TYPE+ tokenDTO.getAccessToken())
-//                .body(tokenDTO);
-//    }
 }
