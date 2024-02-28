@@ -1,22 +1,33 @@
+
 [
   {
+    "imgUrl": "img/mainpageLogo.PNG",
     "url": "/",
     "name": "메인화면"
   },
   {
+    "imgUrl": "img/journalLogo.PNG",
     "url": "/journals",
     "name": "매매일지"
   },
   {
+    "imgUrl": "img/calanderLogo.PNG",
     "url": "/calendar",
     "name": "캘린더"
   },
   {
+    "imgUrl": "img/tradersLogo.PNG",
     "url": "/trader",
     "name": "트레이더스"
   },
   {
+    "imgUrl": "img/settingLogo.PNG",
     "url": "/settings",
     "name": "설정"
+  },
+  {
+    "imgUrl": "img/LogoutLogo.PNG",
+    "url": "/",
+    "name": "로그아웃"
   }
 ]
