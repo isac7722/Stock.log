@@ -1,15 +1,10 @@
-import axios from "axios";
 
-
-// 매매일지 전부 가져오는 요청
+// 매매일지 목록 조회
 export const callJournalList = async () => {
-    return await axios.get("http://localhost:8080/journals/search",
-        {withCredentials: true});
-}
-
-// 백엔드 작업 필요!!
-export async function callJournalListBySearch({text}){
-    await axios("http://localhost:8080/journals", {
-        text:text
-    })
-}
+    return await request.get("/journals/search");
+  };
+  
+  // 매매일지 검색
+  export const callJournalListBySearch = async ({ data }) => {
+    return await request.post("/journals/search", { data });
+  };
