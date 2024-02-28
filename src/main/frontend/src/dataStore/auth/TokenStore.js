@@ -6,4 +6,7 @@ export const useTokenStore = create((set) => ({
   setAccessToken: (value) => set({ accessToken: value }),
   refreshToken: '',
   setRefreshToken: (value) => set({ refreshToken: value }),
+  accessTokenExpiresIn: '',
+  setAccessTokenExpiresIn: (value) => set({ accessTokenExpiresIn: value }),
+
 }));

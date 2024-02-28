@@ -15,6 +15,8 @@ import org.springframework.security.core.Authentication;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
+import java.util.Objects;
+
 @Service
 @RequiredArgsConstructor
 public class AuthService {
@@ -25,13 +27,16 @@ public class AuthService {
     private final RefreshTokenRepository refreshTokenRepository;
 
     @Transactional
-    public UserDTO  signup(UserDTO userDTO) {
+    public void signup(UserDTO userDTO) {
+
+        // 받은 정보를 통해서 유저가 있는지 확인
         if (usersRepository.existsByEmail(userDTO.getEmail())) {
             throw new RuntimeException("이미 가입되어 있는 유저입니다");
         }
 
-        Users user = userDTO.toUsers(passwordEncoder); // 추가함
-        return UserDTO.of(usersRepository.save(user)); // 추가함
+        // 유저를 등록 시킨다
+        usersRepository.save(userDTO.toUsers(passwordEncoder));
+
     }
 
     @Transactional
