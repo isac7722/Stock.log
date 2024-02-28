@@ -1,18 +1,22 @@
 import useJournalStore from "../dataStore/JournalStore";
+import {useEffect} from "react";
 
 const Main = () => {
 
     // test
     const {journalList, setJournalList} = useJournalStore();
 
-    const test = async () => {
-        console.log(journalList);
+    const openingData = async () => {
         await setJournalList();
     }
 
+    useEffect(() => {
+        openingData();
+        console.log(journalList);
+    }, []);
+
     return (
         <>
-            <button onClick={test}>콘솔로 확인</button>
         </>
     )
 }
