@@ -4,7 +4,7 @@ import Button from "react-bootstrap/Button";
 import {callJournalListBySearch} from "../../apis/JournalsAPI";
 
 
-const JournalSearcher = ({journalList, setJournalList}) => {
+const JournalSearcher = () => {
 
     const [text, setText] = useState("");
 

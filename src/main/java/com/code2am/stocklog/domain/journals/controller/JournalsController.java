@@ -17,6 +17,7 @@ import org.springframework.web.bind.annotation.*;
 
 import java.time.LocalDateTime;
 import java.util.List;
+import java.util.Objects;
 import java.util.OptionalDouble;
 import java.util.OptionalInt;
 
@@ -77,6 +78,10 @@ public class JournalsController {
         List<JournalDTO> journals = journalsService.readJournalsByUserId(userId);
 
         System.out.println(journals);
+
+        if(Objects.isNull(journals)){
+            return null;
+        }
         return ResponseEntity.ok(journals);
     }
 
