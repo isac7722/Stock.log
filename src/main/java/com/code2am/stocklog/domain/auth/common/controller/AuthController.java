@@ -20,8 +20,9 @@ public class AuthController {
     private final AuthService authService;
 
     @PostMapping("/signup")
-    public ResponseEntity<UserDTO> signup(@RequestBody UserDTO memberRequestDto) {
-        return ResponseEntity.ok(authService.signup(memberRequestDto));
+    public ResponseEntity<String> signup(@RequestBody UserDTO newUser) {
+        authService.signup(newUser);
+        return ResponseEntity.ok("등록성공");
     }
 
     @PostMapping("/login")

@@ -2,7 +2,8 @@ import axios from "axios";
 import { useEffect, useState } from "react";
 import { Button } from "react-bootstrap";
 import { useNavigate } from "react-router-dom";
-import { useTokenStore } from "../../dataStore/TokenStore";
+import { useTokenStore } from "../../dataStore/auth/TokenStore";
+import { storeTokens } from "../../apis/auth/AuthAPI";
 
 
 const REST_API_KEY = process.env.REACT_APP_REST_API_KEY;
@@ -38,21 +39,12 @@ export const SocialKakao = () => {
         { withCredentials: true }
       );
 
-      const { data } = response;
-      const { accessToken, refreshToken, accessTokenExpiresIn } = data;
-
-      setAccessToken(accessToken);
-      setRefreshToken(refreshToken);
-
-      // localStorage에 저장
-      localStorage.setItem("accessToken", accessToken);
-      localStorage.setItem("refreshToken", refreshToken);
-      localStorage.setItem("expiresAt", Date.now() + accessTokenExpiresIn);
+        storeTokens(response);
 
       // localStorage 에 로그인 상태를 추가
       setIsLoggedIn(true)
-      localStorage.setItem("isLogin", true);
 
+      alert("로그인성공")
       // main 페이지로 redirect
       navigate("/");
 

@@ -29,7 +29,6 @@ public class OAuthService {
         KakaoProfile profile = kakaoAPI.getMemberInfo(token.getAccessToken());
 
         // 사용자의 email 이 DB에 등록 되어 있는지 확인, 없다면 회원가입
-
         String email = profile.getKakao_account().getEmail();
 
         System.out.println("사용자의 이메일: "+email);
@@ -38,25 +37,15 @@ public class OAuthService {
         if (!(usersRepository.existsByEmail(email))){
             System.out.println("이메일 조회 결과 없음, 등록 시작");
 
-            UserDTO userDTO = new UserDTO();
-            userDTO.setEmail(email);
-            userDTO.setPassword("123");
-            userDTO.setUserRole(UserRole.ROLE_USER);
-            userDTO.setSocial("KAKAO");
+            // 카카오 유저 만듬
+            UserDTO newKakaoUser = UserDTO.newKakaoUser(email);
 
             // 신규 유저 회원 가입
-            UserDTO newUser = authService.signup(userDTO);
+           authService.signup(newKakaoUser);
 
-            System.out.println("등록 성공");
+            // 등록한 유저로 로그인
+            return authService.login(newKakaoUser);
 
-            System.out.println("등록된 유저는"+newUser);
-
-            if (usersRepository.existsByEmail(email)){
-                System.out.println("등록된 유저가 있음");
-            }
-
-            TokenDTO tokenDTO = authService.login(userDTO);
-            return tokenDTO;
         }
         else {
             System.out.println("조회 결과 있음");

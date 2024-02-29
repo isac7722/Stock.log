@@ -81,5 +81,19 @@ public class UserDTO {
 
         return usernamePasswordAuthenticationToken;
     }
+
+
+    /* KAKAO USERS */
+    public static UserDTO newKakaoUser(String email){
+
+        UserDTO userDTO = new UserDTO();
+        userDTO.setEmail(email);
+        userDTO.setPassword("123");
+        userDTO.setUserRole(UserRole.ROLE_USER);
+        userDTO.setSocial("KAKAO");
+
+        return userDTO;
+
+    }
 }
 

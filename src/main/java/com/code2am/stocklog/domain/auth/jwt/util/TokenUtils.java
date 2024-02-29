@@ -5,6 +5,7 @@ import com.code2am.stocklog.domain.auth.jwt.model.dto.TokenDTO;
 import io.jsonwebtoken.*;
 import io.jsonwebtoken.io.Decoders;
 import io.jsonwebtoken.security.Keys;
+import jakarta.servlet.http.HttpServletRequest;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
@@ -29,6 +30,9 @@ public class TokenUtils {
     private static final long REFRESH_TOKEN_EXPIRE_TIME = 1000 * 60 * 60 * 24 * 7;  // 7일
 
     private final Key key;
+
+    @Value("${jwt.secret}")
+    private String secretKey;
 
     public TokenUtils(@Value("${jwt.secret}") String secretKey) {
         byte[] keyBytes = Decoders.BASE64.decode(secretKey);
@@ -108,5 +112,40 @@ public class TokenUtils {
         } catch (ExpiredJwtException e) {
             return e.getClaims();
         }
+    }
+
+
+
+    // 요청에서 Jwt 추출, 유저아이디 반환
+
+    public String getEmailFromJwtToken(HttpServletRequest request) {
+
+        String authorization = request.getHeader("Authorization");
+        String accessToken = authorization.substring("BEARER ".length());
+
+        System.out.println("액세스 토큰 반환 : " + accessToken);
+
+        String email = null;
+
+        try {
+            // JWT 복호
+            Jws<Claims> claimsJws = Jwts.parser().setSigningKey(secretKey).parseClaimsJws(accessToken);
+
+            // email 받는다
+            Claims claims = claimsJws.getBody();
+
+            System.out.println("Claims: " + claims);
+
+           email = claimsJws.getBody().getSubject();
+
+            System.out.println("Email : "+email);
+
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        return email;
+
     }
 }
