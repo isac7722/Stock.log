@@ -27,7 +27,7 @@ import React from 'react';
 
 const AuthButton = ({ buttonText, onClick }) => {
   return (
-    <button onClick={onClick} className="authButton">
+    <button onClick={onClick} className="authBtn">
       {buttonText}
     </button>
   );
