@@ -3,12 +3,12 @@ import {Col, Row} from "react-bootstrap";
 import Card from "react-bootstrap/Card";
 
 
-const NoteList = ({noteList}) => {
+const NoteList = ({notes}) => {
 
     // 카드 리스트를 3개씩 묶어서 표시하기 위해 조정
     const groupedNotes = [];
-    while (noteList.length > 0) {
-        groupedNotes.push(noteList.splice(0, 3));
+    while (notes.length > 0) {
+        groupedNotes.push(notes.splice(0, 3));
     }
 
     // Carousel 영역

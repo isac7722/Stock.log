@@ -2,6 +2,7 @@ import axios from "axios";
 import { useEffect, useState } from "react";
 import { Button } from "react-bootstrap";
 import { useNavigate } from "react-router-dom";
+import { useTokenStore } from "../../dataStore/TokenStore";
 
 
 const REST_API_KEY = process.env.REACT_APP_REST_API_KEY;
@@ -13,8 +14,10 @@ const KAKAO_AUTH_URI = `https://kauth.kakao.com/oauth/authorize?client_id=${REST
 export const SocialKakao = () => {
 
   const [isLoggedIn, setIsLoggedIn] = useState(false);
-  const [accessToken, setAccessToken] = useState("");
-  const [refreshToken, setRefreshToken] = useState("");
+  // const [accessToken, setAccessToken] = useState("");
+  // const [refreshToken, setRefreshToken] = useState("");
+
+  const { accessToken, setAccessToken, refreshToken, setRefreshToken } = useTokenStore();
 
   const navigate = useNavigate();
 
@@ -80,7 +83,6 @@ export const SocialKakao = () => {
 
   // accessToken이 만료된 경우 reissue
   const reissueAccessToken = async () => {
-    const refreshToken = localStorage.getItem("refreshToken");
 
     if (!refreshToken) return;
 
@@ -121,8 +123,8 @@ export const SocialKakao = () => {
         // 로그인 후 보여줄 내용
         <div>
           <p>로그인 성공!</p>
-          <p>accessToken: {localStorage.getItem("accessToken")}</p>
-          <p>refreshToken: {localStorage.getItem("refreshToken")}</p>
+          <p>accessToken: {accessToken}</p>
+          <p>refreshToken: {refreshToken}</p>
           <Button onClick={handleLogin}>카카오 로그인</Button>
         </div>
 
